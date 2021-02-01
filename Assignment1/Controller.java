@@ -1,7 +1,9 @@
+package srcAssignment1;
+
 /**
  * This file is to be completed by you.
  *
- * @author <Please enter your matriculation number, not your name>
+ * @author s2101367
  */
 public final class Controller
 {
@@ -17,7 +19,7 @@ public final class Controller
 	public void startSession()
 	{
 		// TODO Complete this method. The following bits of code should be useful:
-		
+
 		view.displayBoard(model);
 		
 		model.makeMove(1);
