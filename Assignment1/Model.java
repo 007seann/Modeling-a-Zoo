@@ -115,7 +115,8 @@ public final class Model
 		// downward
 		int count=0;
 		for (int i = row; i < nrRows; i++) {
-			if(board[i][col] == playerStone) { //질문
+			if(board[i][col] == playerStone) { // 로직 맞는지 확인좀. if statement를 이렇게 쓴 이유는 board[i][col]위치에
+				                               // 있는 stone( X or O )이 user가 새로 넣은 stone(playerStone)과 동일한 경우를 체크하려고 한거
 				count++;
 				if (count == 4) {
 					return true;
