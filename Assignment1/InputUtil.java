@@ -11,7 +11,7 @@ import java.util.Scanner;
 public final class InputUtil
 {
 	private static final Scanner sc = new Scanner(System.in);
-	
+
 	// A private constructor prevents other code from instantiating
 	// a class that is meant to be used in a static context.
 	private InputUtil()
@@ -40,16 +40,16 @@ public final class InputUtil
 				sc.nextLine();
 				return input;
 			}
-			
+
 			// The input was not an integer, print an error and repeat.
 			System.out.print("Please enter an integer: ");
-			
+
 			// Consume the rest of the line.
 			sc.nextLine();
 		}
 		while(true);
 	}
-	
+
 	/**
 	 * Waits for the user to type a single character on standard input.
 	 * The character they entered is returned when they press enter.
@@ -67,18 +67,18 @@ public final class InputUtil
 			{
 				// Obtain the user input.
 				String input = sc.nextLine();
-				
+
 				// If a single char was entered, return it.
 				if(input.length() == 1)
 					return input.charAt(0);
 			}
-			
+
 			// Invalid input length, print an error and repeat.
 			System.out.print("Please enter a single character: ");
 		}
 		while(true);
 	}
-	
+
 	/**
 	 * Waits for the user to type on standard input.
 	 * The String they entered is returned when they press enter.

@@ -9,24 +9,46 @@ public final class Controller
 {
 	private final Model model;
 	private final TextView view;
-	
-	public Controller(Model model, TextView view)
+
+	public Controller(Model objectModel, TextView objectView)
 	{
-		this.model = model;
-		this.view = view;
+		this.model = objectModel;
+		this.view = objectView;
 	}
-	
+
 	public void startSession()
 	{
-		// TODO Complete this method. The following bits of code should be useful:
 
-		view.displayBoard(model);
-		
-		model.makeMove(1);
-		
-		// Tell the user that the game has started.
-		view.displayNewGameMessage();
-		
-		// Repeat...
+		this.view.displayBoard(this.model);
+		this.view.displayNewGameMessage();
+
+		boolean player = true; // player 1 -> true, player 2 -> false
+		boolean checkWin = false;
+		do {
+
+			if (player)
+				player = false;
+			else
+				player = true;
+
+			this.model.setPlayer(player); // after knowing player turn, a certain stone need to be assigned. 왜 setPlayer가 있어야 하는거지? player 1인지 player2인지 확인해주는건가?
+
+			int col = InputUtil.readIntFromUser();
+
+			// Insert a stone on the column
+			this.model.makeMove(col);
+
+			this.view.displayBoard(this.model);
+
+			//Detect whether game is over or not. Did Player 1 win?
+			//boolean checkWin = model.checkWin(); win ->return true, not win(= continue) ->return false
+			//boolean checkWin = false;
+
+		} while(!checkWin);
+		//while(!model.checkWin(int row, col, char playerStone)); // 왜지?
+
+
+		System.out.println("Player" + player + " Win.  Congrat!!!");
+
 	}
 }
