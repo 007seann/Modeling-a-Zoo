@@ -35,7 +35,6 @@ public final class Controller
 
 			int col = InputUtil.readIntFromUser();
 
-			// Insert a stone on the column
 			this.model.makeMove(col);
 
 			this.view.displayBoard(this.model);
@@ -45,7 +44,7 @@ public final class Controller
 			//boolean checkWin = false;
 
 		} while(!checkWin);
-		//while(!model.checkWin(int row, col, char playerStone)); // 왜지?
+		//while(!model.checkWin(int row, col, char playerStone)); // 왜안될까요~~~~. row,col,playerStone이 localvariable인데 이 method안에 정의가 안되있어서인가? 그러면 어떻게하지?
 
 
 		System.out.println("Player" + player + " Win.  Congrat!!!");

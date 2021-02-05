@@ -35,14 +35,14 @@ public final class Model
 	// =============================================================================
 	public Model()
 	{
-		// Initialise the board size to its default values.
+
 		nrRows = DEFAULT_NR_ROWS;
 		nrCols = DEFAULT_NR_COLS;
-		// Initialise board with special character "."
+
 		for (int i=0; i < nrRows; i ++) {
 			for (int j=0; j < nrCols; j ++) {
-				assert board != null;
-				board[i][j] = '.';
+				assert board != null; // 일단 삼촌이 처음에 짜준거를 바탕(boolean checkWin = false)으로 실행해보면 NullPointerException이 나와서 변경했으나 해결되지 않음.
+				board[i][j] = '.'; // 여기서 왜 NullPointerException이 나오는거? nrRows * nrCols 크기의 보드에 '.'를 assign해준거면 null이 안나오지 않나??
 			}
 		}
 		this.board = board;
@@ -68,7 +68,7 @@ public final class Model
 		}
 
 
-		// What happend to row? Should I check against of not?// I should check
+
 		boolean isValid = false;
 		for (int i=0; i < nrRows; i++) {
 			if(board[i][col] == '.') {
@@ -90,7 +90,7 @@ public final class Model
 			return;
 		}
 
-		// Find the next empty row index for the column.
+
 		int row = 0;
 		for ( int i=0; i<nrRows; i++) {
 			if(board[i][col] == '.') {
@@ -99,14 +99,14 @@ public final class Model
 			}
 		}
 
-		// Find the color of stone per player.
+
 		char stone;
 		if (this.player)
 			stone = 'O';
 		else
 			stone = 'X';
 
-		// Insert the stone to row,col
+
 		this.board[row][col] = stone;
 
 	}
@@ -115,7 +115,7 @@ public final class Model
 		// downward
 		int count=0;
 		for (int i = row; i < nrRows; i++) {
-			if(board[i][col] == playerStone) {
+			if(board[i][col] == playerStone) { //질문
 				count++;
 				if (count == 4) {
 					return true;
