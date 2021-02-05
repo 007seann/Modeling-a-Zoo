@@ -1,3 +1,5 @@
+package srcAssignment1;
+
 /**
  * The main class of the Connect Four game.
  * You should not have to touch this code (except maybe for advanced features).
