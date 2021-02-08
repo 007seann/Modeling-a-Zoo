@@ -1,4 +1,4 @@
-package srcAssignment1;
+package Assignment1;
 
 /**
  * The main class of the Connect Four game.

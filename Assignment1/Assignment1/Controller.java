@@ -21,9 +21,11 @@ public final class Controller
 
 		this.view.displayBoard(this.model);
 		this.view.displayNewGameMessage();
-
 		boolean player = true; // player 1 -> true, player 2 -> false
-		boolean checkWin = false;
+		//boolean checkWin = false;
+		int col = InputUtil.readIntFromUser();
+		int row = model.makeMove(col);
+		char playerStone = model.getStone(col, row);
 		do {
 
 			if (player)
@@ -33,7 +35,7 @@ public final class Controller
 
 			this.model.setPlayer(player); // after knowing player turn, a certain stone need to be assigned. 왜 setPlayer가 있어야 하는거지? player 1인지 player2인지 확인해주는건가?
 
-			int col = InputUtil.readIntFromUser();
+			col = InputUtil.readIntFromUser();
 
 			this.model.makeMove(col);
 
@@ -43,8 +45,10 @@ public final class Controller
 			//boolean checkWin = model.checkWin(); win ->return true, not win(= continue) ->return false
 			//boolean checkWin = false;
 
-		} while(!checkWin);
-		//while(!model.checkWin(int row, col, char playerStone)); // 왜안될까요~~~~. row,col,playerStone이 localvariable인데 이 method안에 정의가 안되있어서인가? 그러면 어떻게하지?
+		} // while(!checkWin);
+		while(!model.checkWin(row, col, playerStone));// 왜안될까요~~~~. row,col,playerStone이 localvariable인데 이 method안에 정의가 안되있어서인가? 그러면 어떻게하지?
+
+
 
 
 		System.out.println("Player" + player + " Win.  Congrat!!!");

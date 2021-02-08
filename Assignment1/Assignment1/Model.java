@@ -38,14 +38,14 @@ public final class Model
 
 		nrRows = DEFAULT_NR_ROWS;
 		nrCols = DEFAULT_NR_COLS;
-
+		board = new char[nrRows][nrCols];
 		for (int i=0; i < nrRows; i ++) {
 			for (int j=0; j < nrCols; j ++) {
 				assert board != null; // 일단 삼촌이 처음에 짜준거를 바탕(boolean checkWin = false)으로 실행해보면 NullPointerException이 나와서 변경했으나 해결되지 않음.
 				board[i][j] = '.'; // 여기서 왜 NullPointerException이 나오는거? nrRows * nrCols 크기의 보드에 '.'를 assign해준거면 null이 안나오지 않나??
 			}
 		}
-		this.board = board;
+
 		this.player = true;
 
 	}
@@ -82,14 +82,13 @@ public final class Model
 	}
 
 
-	public void makeMove(int col)
+	public int makeMove(int col)
 	{
 		if(!this.isMoveValid(col)) {
 			System.out.println("Oops!!!It's wrong. please try another one");
 			// if the chosen one is not valid, need to build a code to make user to choose another available one.
-			return;
-		}
 
+		}
 
 		int row = 0;
 		for ( int i=0; i<nrRows; i++) {
@@ -108,6 +107,7 @@ public final class Model
 
 
 		this.board[row][col] = stone;
+		return row;
 
 	}
 
