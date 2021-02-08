@@ -1,4 +1,4 @@
-package srcAssignment1;
+package Assignment1;
 
 /**
  * This file is to be completed by you.
@@ -30,7 +30,7 @@ public final class TextView
 		// Get your board representation.
 
 		//Reverse order
-		for(int i=nrRows - 1; i >= 0; i++) {
+		for(int i=nrRows - 1; i >= 0; i--) {
 			for(int j=0; j <nrCols; j++) {
 				char stone = model.getStone(i, j);
 				System.out.print(stone + " ");
@@ -59,13 +59,6 @@ public final class TextView
 		//sb.append(rowDivider);
 
 		// Then print out the assembled String.
-		System.out.println(sb);
-		System.out.println(sb);
-		System.out.println(sb);
-		System.out.println(sb);
-		System.out.println(sb);
-		System.out.println(sb);
-		System.out.println(rowDivider);
-		System.out.println("  0   1   2   3   4   5   6  ");
+		System.out.println("0 1 2 3 4 5 6");
 	}
 }
