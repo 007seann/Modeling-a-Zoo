@@ -1,4 +1,4 @@
-package srcAssignment1;
+package Assignment1;
 
 /**
  * This file is to be completed by you.
@@ -41,7 +41,7 @@ public final class Model
 		board = new char[nrRows][nrCols];
 		for (int i=0; i < nrRows; i ++) {
 			for (int j=0; j < nrCols; j ++) {
-				assert board != null; // 일단 삼촌이 처음에 짜준거를 바탕(boolean checkWin = false)으로 실행해보면 NullPointerException이 나와서 변경했으나 해결되지 않음.
+				//assert board != null; // 일단 삼촌이 처음에 짜준거를 바탕(boolean checkWin = false)으로 실행해보면 NullPointerException이 나와서 변경했으나 해결되지 않음.
 				board[i][j] = '.'; // 여기서 왜 NullPointerException이 나오는거? nrRows * nrCols 크기의 보드에 '.'를 assign해준거면 null이 안나오지 않나??
 			}
 		}
@@ -111,9 +111,170 @@ public final class Model
 
 	}
 
-	public boolean checkWin(int row, int col, char playerStone) {
+	// check horizontal line if it is contiguous starting from row,col.
+	// For the given stone at (row, col), return the length of horizontal line that is formed with the same stone (at the same row).
+
+	private int getHorizontalLength(int row, int col) {
+		// Get the currrent stone
+		char playerStone = board[row][col];
+
+		// Corner case. Bail out if it's empty
+		if (playerStone == '.')
+			return 0;
+
+		// Initialize the count = 1 (the current stone itself)
+		int count = 1;
+
+		// Search right
+		for (int j = col + 1; j < nrCols; j++) {
+			if (board[row][j] != playerStone)
+				return count;
+			count++;
+		}
+
+		// Search left
+		for (int j = col - 1; j >= 0; j--) {
+			if (board[row][j] != playerStone)
+				return count;
+			count++;
+		}
+
+		return count;
+	}
+	// check vertical line if it is contiguous starting from row,col.
+    private int getVerticalLength(int row, int col) {
+	// Get the current stone
+	char playerStone = board[row][col];
+
+	// Corner case. Bail out if it's empty
+	if (playerStone == '.')
+		return 0;
+
+	// Initialize the count = 1 (the current stone itself)
+	int count = 1;
+
+	//Search up
+	for (int i = row - 1; i >= 0; i--) {
+		if (board[i][col] != playerStone)
+			return count;
+		count++;
+	}
+
+	//Search down
+	for (int i = row + 1; i < nrRows; i++)	{
+		if (board[i][col] != playerStone)
+			return count;
+		count++;
+	}
+	return count;
+
+	}
+
+
+	// check top-right to bottom-left diagonal line if it is contiguous starting from row,col
+	private int getDiagonalSlashLength(int row, int col) {
+	// Get the current stone
+	char playerStone = board[row][col];
+
+	// Corner case. Bail out if it's empty
+	if (board[row][col] == '.')
+		return 0;
+
+	// Initialize the current stone itself
+	int count = 1;
+
+	//Search top-right
+	for (int i = row, j = col; i >= 0 && j < nrCols; i--,j++) {
+		if (board[i][j] != playerStone)
+			return count;
+		count++;
+	}
+
+	//Search down-left
+	for (int i = row, j = col; i < nrRows && j < nrCols; i++,j++) {
+		if (board[i][j] != playerStone)
+			return count;
+		count++;
+	}
+	return count;
+
+	}
+
+	// check top-left to bottom-right diagonal line if it is contiguous starting from row,col
+	private int getDiagonalBackslashLength(int row, int col) {
+	// Get the current state
+	char playerStone = board[row][col];
+
+	// Corner case. Bail out if it's empty
+	if (board[row][col] == '.')
+		return 0;
+
+	// Initialize the current stone itself
+	int count = 1;
+
+	// Search top-left
+	for (int i = row, j = col; i < nrRows && j >=0; i++,j--) {
+		if(board[i][j] != playerStone)
+			return count;
+		count++;
+	}
+
+	// Search bottom-right
+	for (int i = row, j = col; i < nrRows && j < nrCols; i++,j++) {
+		if(board[i][j] != playerStone)
+			return count;
+		count++;
+	}
+	return count;
+}
+
+
+
+
+	/*
+	private int getHorizontalLength(int col) {
+
+
+		int count = 1;
+		if (0 < col && col < 5){
+			for (int row = 0; row < nrRows; row++) {
+				for (int j = -1; j < 3; j++) {
+					if (board[row][col + j] == board[row][col]) ;
+					{
+						count++;
+					}
+				}
+			}
+		} else ...
+		return count;
+	}
+	*/
+
+
+	public boolean checkWin(int row, int col) {
+
+
+		if (getHorizontalLength(row, col) == 4)
+			return true;
+		else if (getVerticalLength(row, col) == 4)
+			return true;
+		else if (getDiagonalSlashLength(row, col) == 4)
+			return true;
+		else if (getDiagonalBackslashLength(row, col) == 4)
+			return true;
+		else return false;
+	}
+
+
+
+
+
+
+		/*
 		// downward
-		int count=0;
+
+		char playerStone = board[row][col];
+		int count = 0;
 		for (int i = row; i < nrRows; i++) {
 			if(board[i][col] == playerStone) { // 로직 맞는지 확인좀. if statement를 이렇게 쓴 이유는 board[i][col]위치에
 				                               // 있는 stone( X or O )이 user가 새로 넣은 stone(playerStone)과 동일한 경우를 체크하려고 한거
@@ -175,7 +336,7 @@ public final class Model
 		}
 
 		//down left
-		count =0;
+		count = 0;
 		for (int i = row, j = col; i >=0 && j >= 0; i--,j-- ) {
 			if(board[i][j] == '.') {
 				break;
@@ -192,7 +353,7 @@ public final class Model
 		}
 
 		//up right
-		count =0;
+		count = 0;
 		for (int i = row, j = col; i >= 0 && j < nrCols; i--,j++) {
 			if(board[i][j] == '.') {
 				break;
@@ -208,7 +369,7 @@ public final class Model
 		}
 
 		//up left
-		count =0;
+		count = 0;
 		for (int i = row, j = col; i < nrRows && j >=0; i++,j--) {
 			if(board[i][j] == '.') {
 				break;
@@ -224,6 +385,7 @@ public final class Model
 		}
 		return false;
 	}
+	*/
 
 
 	public void setPlayer(boolean p)
@@ -244,4 +406,5 @@ public final class Model
 		return nrCols;
 	}
 }
+
 
