@@ -1,4 +1,4 @@
-package srcAssignment1;
+package Assignment1;
 
 /**
  * This file is to be completed by you.
@@ -21,11 +21,12 @@ public final class Controller
 
 		this.view.displayBoard(this.model);
 		this.view.displayNewGameMessage();
+
 		boolean player = true; // player 1 -> true, player 2 -> false
 		//boolean checkWin = false;
 		int col = InputUtil.readIntFromUser();
 		int row = model.makeMove(col);
-		char playerStone = model.getStone(col, row);
+		//char playerStone = model.getStone(col, row);
 		do {
 
 			if (player)
@@ -33,9 +34,11 @@ public final class Controller
 			else
 				player = true;
 
-			this.model.setPlayer(player); // after knowing player turn, a certain stone need to be assigned. 왜 setPlayer가 있어야 하는거지? player 1인지 player2인지 확인해주는건가?
+			this.model.setPlayer(player); // after knowing player turn, a certain stone need to be assigned.
+			                              // 왜 setPlayer가 있어야 하는거지? player 1인지 player2인지 확인해주는건가?
 
-			col = InputUtil.readIntFromUser();
+			col = view.askForMove();
+
 
 			this.model.makeMove(col);
 
@@ -46,12 +49,14 @@ public final class Controller
 			//boolean checkWin = false;
 
 		} // while(!checkWin);
-		while(!model.checkWin(row, col, playerStone));// 왜안될까요~~~~. row,col,playerStone이 localvariable인데 이 method안에 정의가 안되있어서인가? 그러면 어떻게하지?
+		while(!model.checkWin(row, col));
 
 
 
-
-		System.out.println("Player" + player + " Win.  Congrat!!!");
+		if (player == true)
+		System.out.println("Player 1  Win.  Congrat!!!");
+		if (player == false)
+		System.out.println("Player 2  Win.  Congrat!!!");
 
 	}
 }
