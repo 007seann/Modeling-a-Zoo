@@ -1,10 +1,11 @@
 package animals;
 
-public class Lion extends Animal {
+public class Chickens extends Animal{
 
     private final String nickName;
 
-    public Lion(String nickName) {
+
+    public Chickens(String nickName) {
         this.nickName = nickName;
 
     }
@@ -16,10 +17,12 @@ public class Lion extends Animal {
 
     @Override
     public boolean isCompatibleWith(Animal animal) {
-        if (animal.equals(Animal.zebra) || animal.equals(dolphin) || animal.equals(chickens)) {
+        if (animal.equals(Animal.lion) || animal.equals(dolphin) || animal.equals(chickens) ) {
             return false;
         }
-        return (animal.equals(lion));
+        return (animal.equals(zebra));
+
+
     }
 
 }

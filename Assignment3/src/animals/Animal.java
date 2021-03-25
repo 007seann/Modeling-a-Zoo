@@ -7,6 +7,10 @@ package animals;
  */
 public abstract class Animal
 {
+	protected static Chickens chickens;
+	protected static Lion lion;
+	protected static Dolphin dolphin;
+	protected static Zebra zebra;
 	/**
 	 * @return Returns this animal's given name.
 	 */
@@ -18,4 +22,6 @@ public abstract class Animal
 	 * @return Returns true for compatible animals and false otherwise.
 	 */
 	public abstract boolean isCompatibleWith(Animal animal);
+
+
 }

@@ -2,14 +2,23 @@ package animals;
 
 public class Zebra extends Animal {
 
+    private final String nickName;
 
+    public Zebra(String nickName) {
+        this.nickName = nickName;
+
+    }
     @Override
     public String getNickname() {
-        return null;
+        return nickName;
     }
 
     @Override
     public boolean isCompatibleWith(Animal animal) {
-        return false;
+        if (animal.equals(Animal.lion) || animal.equals(dolphin) || animal.equals(chickens)) {
+            return false;
+        }
+        return (animal.equals(zebra));
     }
+
 }
