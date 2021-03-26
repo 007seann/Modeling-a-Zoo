@@ -16,10 +16,10 @@ public class Sharks extends Animal{
 
     @Override
     public boolean isCompatibleWith(Animal animal) {
-        if (animal.equals(Animal.zebra) || animal.equals(lion) || animal.equals(buzzards)) {
+        if (animal.equals(Animal.seals)) {
             return false;
         }
-        return (animal.equals(sharks));
+        return (animal.equals(sharks) || animal.equals(starfish));
     }
 
 }

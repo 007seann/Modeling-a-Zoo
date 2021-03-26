@@ -7,10 +7,11 @@ import dataStructures.ICashCount;
 import java.util.ArrayList;
 
 public class Zoo implements IZoo{
+
     @Override
     public int addArea(IArea area) {
-        int id = Integer.MIN_VALUE;
-        area.add(id);
+        return 0;//int id = Integer.MIN_VALUE;
+        //area.add(id);
     }
 
     @Override

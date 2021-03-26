@@ -16,7 +16,7 @@ public class Lion extends Animal {
 
     @Override
     public boolean isCompatibleWith(Animal animal) {
-        if (animal.equals(Animal.zebra) || animal.equals(sharks) || animal.equals(buzzards)) {
+        if (animal.equals(Animal.zebra) || animal.equals(gazelles)) {
             return false;
         }
         return (animal.equals(lion));
