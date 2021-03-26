@@ -9,7 +9,8 @@ import java.util.ArrayList;
 public class Zoo implements IZoo{
     @Override
     public int addArea(IArea area) {
-        return 0;
+        int id = Integer.MIN_VALUE;
+        area.add(id);
     }
 
     @Override

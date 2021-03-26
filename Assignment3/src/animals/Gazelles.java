@@ -1,10 +1,10 @@
 package animals;
 
-public class Lion extends Animal {
+public class Gazelles extends Animal {
 
     private final String nickName;
 
-    public Lion(String nickName) {
+    public Gazelles(String nickName) {
         this.nickName = nickName;
 
     }
