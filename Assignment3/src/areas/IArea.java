@@ -7,6 +7,9 @@ import java.util.ArrayList;
  */
 public interface IArea
 {
+	int getId();
+	void setId(long lastID);
+	String getName();
 	/**
 	 * @return Returns the IDs of the areas adjacent to this one.
 	 */
