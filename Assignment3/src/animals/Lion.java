@@ -1,5 +1,7 @@
 package animals;
 
+import areas.*;
+
 public class Lion extends Animal {
 
     private final String nickName;
@@ -16,10 +18,55 @@ public class Lion extends Animal {
 
     @Override
     public boolean isCompatibleWith(Animal animal) {
-        if (animal.equals(Animal.zebra) || animal.equals(gazelles)) {
+        if (animal instanceof Zebra || animal instanceof Gazelles) {
             return false;
         }
-        return (animal.equals(lion));
+        return (animal instanceof Lion);
+    }
+
+    @Override
+    public boolean isNotHabitat(IArea area) {
+        if(area instanceof PicnicArea || area instanceof Entrance) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean canLiveIn(IArea area) {
+        if(area instanceof Enclosure) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean isWrongHabitat(IArea area) {
+        if(area instanceof Aquarium || area instanceof Cage) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean isFullHabitat(IArea area) {
+        if(Enclosure.enclosure.getMaximum() >= 3) {
+            return true;
+        }
+        return false;
+    }
+
+
+    /**
+     * @param area which refers to the habitat with its current occupants.
+     * @param animal which refers to the animal occupant in the habitat.
+     */
+    @Override
+    public boolean isCompatibleWithArea(IArea area, Animal animal) {
+        if(area instanceof Enclosure) {
+            return true;
+        }
+        return false;
     }
 
 }

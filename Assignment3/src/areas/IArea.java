@@ -7,9 +7,15 @@ import java.util.ArrayList;
  */
 public interface IArea
 {
-	int getId();
-	void setId(long lastID);
-	String getName();
+	/*
+	Cage cage = new Cage();
+	Aquarium aquarium = new Aquarium();
+	Enclosure enclosure = new Enclosure();
+	Entrance entrance = new Entrance();
+	PicnicArea picnicarea = new PicnicArea();
+	 */
+
+
 	/**
 	 * @return Returns the IDs of the areas adjacent to this one.
 	 */

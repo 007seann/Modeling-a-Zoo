@@ -1,5 +1,7 @@
 package animals;
 
+import areas.IArea;
+
 /**
  * You can modify the contents of this class, but you cannot:
  * - change the name, parameters or return types of provided methods
@@ -7,6 +9,7 @@ package animals;
  */
 public abstract class Animal
 {
+	/*
 	protected static Buzzards buzzards;
 	protected static Parrots parrots;
 	protected static Gazelles gazelles;
@@ -15,6 +18,9 @@ public abstract class Animal
 	protected static Starfish starfish;
 	protected static Sharks sharks;
 	protected static Seals seals;
+
+
+	 */
 	/**
 	 * @return Returns this animal's given name.
 	 */
@@ -27,5 +33,18 @@ public abstract class Animal
 	 */
 	public abstract boolean isCompatibleWith(Animal animal);
 
+	public abstract boolean isNotHabitat(IArea area);
+
+	public abstract boolean canLiveIn(IArea area);
+
+	public abstract boolean isWrongHabitat(IArea area);
+
+	public abstract boolean isFullHabitat(IArea area);
+
+	/**
+	 * @param area which refers to the habitat with its current occupants.
+	 * @param animal which refers to the animal occupant in the habitat.
+	 */
+	public abstract boolean isCompatibleWithArea(IArea area, Animal animal);
 
 }

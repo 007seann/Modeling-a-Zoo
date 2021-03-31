@@ -5,6 +5,7 @@ package zoo;
  */
 public final class Codes
 {
+	int codes;
 	/**
 	 * The animal was successfully added to the habitat.
 	 */

@@ -2,30 +2,41 @@ package areas;
 
 import java.util.ArrayList;
 
-public class Cage implements IArea{
+public class Cage extends Area implements IArea {
 
-    public static int id;
+    public static Cage cage;
+    int id;
     String name;
+    int maximum;
+
     ArrayList<IArea> adjacent;
     //public int id;
 
-    @Override
-    public int getId() {
-        return 0;
+    public Cage(String name) {
+        super(name);
+        maximum = 3;
     }
 
-    @Override
-    public void setId(long lastID) {
+    public int getMaximum() { return maximum;}
 
-    }
 
-    @Override
+
     public String getName() {
-        return null;
+        return name;
+    }
+
+
+    public void setName(String name) {
+
     }
 
     @Override
     public ArrayList<Integer> getAdjacentAreas() {
         return null;
+    }
+
+    @Override
+    public boolean isFull() {
+        return false;
     }
 }

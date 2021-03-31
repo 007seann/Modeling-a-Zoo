@@ -2,29 +2,39 @@ package areas;
 
 import java.util.ArrayList;
 
-public class Enclosure implements IArea{
+public class Enclosure extends Area implements IArea {
 
+    public static Enclosure enclosure;
     int id;
     String name;
+    int maximum;
     ArrayList<IArea> adjacent;
 
-    @Override
-    public int getId() {
-        return 0;
+    public Enclosure(String name) {
+        super(name);
+        maximum = 3;
     }
 
-    @Override
-    public void setId(long lastID) {
+    public int getMaximum() { return maximum;}
 
-    }
 
-    @Override
+
     public String getName() {
-        return null;
+        return name;
+    }
+
+
+    public void setName(String name) {
+
     }
 
     @Override
     public ArrayList<Integer> getAdjacentAreas() {
         return null;
+    }
+
+    @Override
+    public boolean isFull() {
+        return false;
     }
 }

@@ -2,30 +2,33 @@ package areas;
 
 import java.util.ArrayList;
 
-public class PicnicArea implements IArea{
+public class PicnicArea extends Area implements IArea {
 
     int id;
     String name;
     ArrayList<IArea> adjacent;
 
-
-    @Override
-    public int getId() {
-        return 0;
+    public PicnicArea(String name) {
+        super(name);
     }
 
-    @Override
-    public void setId(long lastID) {
 
-    }
-
-    @Override
     public String getName() {
-        return null;
+        return name;
+    }
+
+
+    public void setName(String name) {
+
     }
 
     @Override
     public ArrayList<Integer> getAdjacentAreas() {
         return null;
+    }
+
+    @Override
+    public boolean isFull() {
+        return false;
     }
 }

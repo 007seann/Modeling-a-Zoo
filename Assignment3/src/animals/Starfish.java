@@ -1,5 +1,7 @@
 package animals;
 
+import areas.*;
+
 public class Starfish extends Animal{
 
     private final String nickName;
@@ -17,7 +19,51 @@ public class Starfish extends Animal{
     @Override
     public boolean isCompatibleWith(Animal animal) {
 
-        return (animal.equals(sharks) || animal.equals(starfish) || animal.equals(seals));
+        return (animal instanceof Sharks || animal instanceof Starfish || animal instanceof Seals);
+    }
+
+    @Override
+    public boolean isNotHabitat(IArea area) {
+        if(area instanceof PicnicArea || area instanceof Entrance) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean canLiveIn(IArea area) {
+        if(area instanceof Starfish) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean isWrongHabitat(IArea area) {
+        if(area instanceof Cage || area instanceof Enclosure) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean isFullHabitat(IArea area) {
+        if(Aquarium.aquarium.getMaximum() >= 3) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * @param area which refers to the habitat with its current occupants.
+     * @param animal which refers to the animal occupant in the habitat.
+     */
+    @Override
+    public boolean isCompatibleWithArea(IArea area, Animal animal) {
+        if( area instanceof Aquarium && isCompatibleWith(animal) ) {
+            return true;
+        }
+        return false;
     }
 
 }

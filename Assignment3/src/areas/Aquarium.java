@@ -2,29 +2,47 @@ package areas;
 
 import java.util.ArrayList;
 
-public class Aquarium implements IArea {
+public class Aquarium extends Area implements IArea{
 
+    public static Aquarium aquarium;
     int id;
     String name;
+    int maximum; // The maximum number of aquarium is 3.
     ArrayList<IArea> adjacent;
 
-    @Override
-    public int getId() {
-        return 0;
+    public Aquarium(String name) {
+        super(name);
+        maximum = 0;
     }
 
-    @Override
+    public int getMaximum() { return maximum;}
+
+
+    public int getId() {
+        return id;
+    }
+
+
     public void setId(long lastID) {
 
     }
 
-    @Override
     public String getName() {
-        return null;
+        return name;
+    }
+
+
+    public void setName(String name) {
+
     }
 
     @Override
     public ArrayList<Integer> getAdjacentAreas() {
         return null;
+    }
+
+    @Override
+    public boolean isFull() {
+        return false;
     }
 }
