@@ -13,15 +13,6 @@ public class PicnicArea extends Area implements IArea {
     }
 
 
-    public String getName() {
-        return name;
-    }
-
-
-    public void setName(String name) {
-
-    }
-
     @Override
     public ArrayList<Integer> getAdjacentAreas() {
         return null;

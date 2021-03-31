@@ -4,45 +4,34 @@ import java.util.ArrayList;
 
 public class Aquarium extends Area implements IArea{
 
-    public static Aquarium aquarium;
     int id;
     String name;
-    int maximum; // The maximum number of aquarium is 3.
+    int number;
     ArrayList<IArea> adjacent;
 
     public Aquarium(String name) {
         super(name);
-        maximum = 0;
+        number = 0;
     }
 
-    public int getMaximum() { return maximum;}
+    public int getNumber() { return number;}
 
-
-    public int getId() {
-        return id;
-    }
-
-
-    public void setId(long lastID) {
-
-    }
-
-    public String getName() {
-        return name;
-    }
-
-
-    public void setName(String name) {
-
-    }
 
     @Override
     public ArrayList<Integer> getAdjacentAreas() {
         return null;
     }
 
+    /**
+     * The maximum number of Aquarium is 3.
+     * @return true for when the number of animal objects in Aquarium is greater than or equal to 3.
+     * False for when Aquarium is less than 3.
+     */
     @Override
     public boolean isFull() {
+        if(getNumber() >= 3) {
+            return true;
+        }
         return false;
     }
 }

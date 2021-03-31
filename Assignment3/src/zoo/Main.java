@@ -10,6 +10,12 @@ public class Main {
 
         Zoo z = new Zoo();
 
+        Entrance a6 = new Entrance("WelcomeWorld");
+        int en1 = z.addArea(a6);
+        System.out.println(en1);
+        System.out.println(z.getArea(en1));
+        System.out.println();
+
         PicnicArea a1 = new PicnicArea("Meadow");
         int p1 = z.addArea(a1);
         System.out.println(p1);
@@ -24,11 +30,15 @@ public class Main {
 
 
         Aquarium a3 = new Aquarium("OceanWorld");
+        Aquarium b3 = new Aquarium("OceanWorld");
         Seals s1 = new Seals("Miki");
         int aq1 = z.addArea(a3);
-
+        int aq2 = z.addArea(b3);
         System.out.println(aq1);
         System.out.println(z.getArea(aq1));
+        System.out.println(aq2);
+        System.out.println(z.getArea(aq2));
+
         System.out.println(z.addAnimal(aq1, s1));
         System.out.println(z.animals.get(0).getNickname());
         System.out.println(s1.isCompatibleWithArea(a3, s1));
@@ -41,18 +51,24 @@ public class Main {
         Cage a4 = new Cage("LegendFalcon");
         int c1 = z.addArea(a4);
         System.out.println(c1);
+        System.out.println(z.getArea(c1));
 
         Enclosure a5 = new Enclosure("BigDog");
+        Enclosure b5 = new Enclosure("BigDog");
         int e1 = z.addArea(a5);
+        int e2 = z.addArea(b5);
         System.out.println(e1);
         System.out.println(z.getArea(e1));
+        System.out.println(e2);
+        System.out.println(z.getArea(e2));
 
-        Entrance a6 = new Entrance("WelcomeWorld");
-        int en1 = z.addArea(a6);
-        System.out.println(en1);
 
-        System.out.println(z.getArea(aq1));
 
+
+        Cage a7 = new Cage("Eagle");
+        int c2 = z.addArea(a7);
+        System.out.println(c2);
+        System.out.println(z.getArea(c2));
 
 
 

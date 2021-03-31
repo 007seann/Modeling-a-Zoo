@@ -2,6 +2,7 @@ package zoo;
 
 import animals.Animal;
 import areas.Area;
+import areas.Entrance;
 import areas.IArea;
 import dataStructures.ICashCount;
 
@@ -10,6 +11,7 @@ import java.util.ArrayList;
 public class Zoo implements IZoo{
 
     static int lastID;
+    static final int entranceID = 0;
     ArrayList<Integer> areaIDs;
     ArrayList<String> areaNames;
     ArrayList<Area> areas;
@@ -23,7 +25,7 @@ public class Zoo implements IZoo{
         areaIDs = new ArrayList<>();
         areas = new ArrayList<>();
         animals = new ArrayList<>();
-        lastID = 0;
+        lastID = 1;
         int code = 0;
         areaIndex = 0;
     }
@@ -31,6 +33,13 @@ public class Zoo implements IZoo{
     @Override
     public int addArea(IArea area) {
 
+        if(area instanceof Entrance) {
+
+            Area areA = (Area) area;
+            areA.setId(entranceID);
+            areas.add((Area) area);
+            return entranceID;
+        }
             // Create a new id by increasing the global/static id
             ++lastID;
 
@@ -72,6 +81,9 @@ public class Zoo implements IZoo{
            for(IArea area : areas) {
      if ((Area area).getId() == areadId) {
          */
+        if( areaId == 0 ) {
+            return areas.get(lastID - 1);
+        }
 
         for(Area area : areas) {
             if(area.getId() == areaId) {
@@ -90,21 +102,24 @@ public class Zoo implements IZoo{
 
     @Override
     public byte addAnimal(int areaId, Animal animal) {
-        if(area.isHabitat(getArea(areaId))) {
-            return Codes.NOT_A_HABITAT;
+        if( area != null ) {
+            if(area.isHabitat(getArea(areaId))) {
+                return Codes.NOT_A_HABITAT;
+            }
+
+            if(animal.canLiveIn(getArea(areaId))) {
+                return Codes.WRONG_HABITAT;
+            }
+
+            if(area.isFull()) {
+                return Codes.HABITAT_FULL;
+            }
+
+            if(!animal.isCompatibleWithArea(getArea(areaId), animal)) {
+                return Codes.INCOMPATIBLE_INHABITANTS;
+            }
         }
 
-        if(animal.canLiveIn(getArea(areaId))) {
-            return Codes.WRONG_HABITAT;
-        }
-
-        if(animal.isFullHabitat(getArea(areaId))) {
-            return Codes.HABITAT_FULL;
-        }
-
-        if(!animal.isCompatibleWithArea(getArea(areaId), animal)) {
-            return Codes.INCOMPATIBLE_INHABITANTS;
-        }
 
         animals.add(animal);
         return Codes.ANIMAL_ADDED;

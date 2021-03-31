@@ -4,23 +4,16 @@ import java.util.ArrayList;
 
 public class Entrance extends Area implements IArea {
 
-    int id = 0;
+    int id;
     String name;
     ArrayList<IArea> adjacent;
 
     public Entrance(String name) {
         super(name);
+        id = 0;
     }
 
-
-    public String getName() {
-        return name;
-    }
-
-
-    public void setName(String name) {
-
-    }
+    //public int getId() { return id; }
 
     @Override
     public ArrayList<Integer> getAdjacentAreas() {

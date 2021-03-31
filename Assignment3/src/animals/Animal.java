@@ -39,7 +39,6 @@ public abstract class Animal
 
 	public abstract boolean isWrongHabitat(IArea area);
 
-	public abstract boolean isFullHabitat(IArea area);
 
 	/**
 	 * @param area which refers to the habitat with its current occupants.

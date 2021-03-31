@@ -46,13 +46,6 @@ public class Parrots extends Animal{
     }
 
 
-    @Override
-    public boolean isFullHabitat(IArea area) {
-        if(Cage.cage.getMaximum() >= 3) {
-            return true;
-        }
-        return false;
-    }
 
     /**
      * @param area which refers to the habitat with its current occupants.

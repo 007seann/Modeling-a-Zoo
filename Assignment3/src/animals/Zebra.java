@@ -47,14 +47,6 @@ public class Zebra extends Animal {
         return false;
     }
 
-    @Override
-    public boolean isFullHabitat(IArea area) {
-        if(Enclosure.enclosure.getMaximum() >= 3) {
-            return true;
-        }
-        return false;
-    }
-
     /**
      * @param area which refers to the habitat with its current occupants.
      * @param animal which refers to the animal occupant in the habitat.

@@ -48,13 +48,6 @@ public class Sharks extends Animal{
         return false;
     }
 
-    public boolean isFullHabitat(IArea area) {
-        if(Aquarium.aquarium.getMaximum() >= 3) {
-            return true;
-        }
-        return false;
-    }
-
 
     /**
      * @param area which refers to the habitat with its current occupants.

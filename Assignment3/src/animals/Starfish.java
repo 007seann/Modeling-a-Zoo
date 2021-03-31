@@ -46,13 +46,6 @@ public class Starfish extends Animal{
         return false;
     }
 
-    @Override
-    public boolean isFullHabitat(IArea area) {
-        if(Aquarium.aquarium.getMaximum() >= 3) {
-            return true;
-        }
-        return false;
-    }
 
     /**
      * @param area which refers to the habitat with its current occupants.
