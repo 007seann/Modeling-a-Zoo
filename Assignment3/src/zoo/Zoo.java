@@ -17,7 +17,7 @@ public class Zoo implements IZoo{
     ArrayList<Area> areas;
     ArrayList<Animal> animals;
     int areaIndex;
-    Area area;
+   // Area area;
 
 
 
@@ -28,6 +28,8 @@ public class Zoo implements IZoo{
         lastID = 1;
         int code = 0;
         areaIndex = 0;
+
+
     }
 
     @Override
@@ -35,8 +37,8 @@ public class Zoo implements IZoo{
 
         if(area instanceof Entrance) {
 
-            Area areA = (Area) area;
-            areA.setId(entranceID);
+            Area areaObject = (Area) area;
+            areaObject.setId(entranceID);
             areas.add((Area) area);
             return entranceID;
         }
@@ -44,10 +46,10 @@ public class Zoo implements IZoo{
             ++lastID;
 
             assert (area instanceof Area);
-            Area areA = (Area) area;
+            Area areaObject = (Area) area;
 
             // Set id with it
-            areA.setId(lastID);
+            areaObject.setId(lastID);
 
             //append the area to the current container
             areas.add((Area) area);
@@ -102,26 +104,37 @@ public class Zoo implements IZoo{
 
     @Override
     public byte addAnimal(int areaId, Animal animal) {
+        Area area = (Area) getArea(areaId);
         if( area != null ) {
-            if(area.isHabitat(getArea(areaId))) {
+            if(!area.isHabitat()) {
+                System.out.println("Not a habitat: ");
                 return Codes.NOT_A_HABITAT;
             }
 
-            if(animal.canLiveIn(getArea(areaId))) {
+            if(!animal.canLiveIn(getArea(areaId))) {
+                System.out.println("Wrong a habitat: " );
                 return Codes.WRONG_HABITAT;
             }
 
             if(area.isFull()) {
+                System.out.println("Habitat is full: " );
                 return Codes.HABITAT_FULL;
             }
 
-            if(!animal.isCompatibleWithArea(getArea(areaId), animal)) {
+            if(!area.IsCompatibleWithInhabitants(animal)) {
+                System.out.println("Incompatible inhabitant: ");
                 return Codes.INCOMPATIBLE_INHABITANTS;
             }
         }
 
-
+        for(Area areaElements : areas) {
+            if(areaElements.getId() == areaId) {
+                assert area != null;
+                area.addAnimal(animal);
+            }
+        }
         animals.add(animal);
+        System.out.println("Animal is added");
         return Codes.ANIMAL_ADDED;
 
     }

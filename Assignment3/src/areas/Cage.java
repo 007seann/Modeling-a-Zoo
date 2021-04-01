@@ -1,18 +1,35 @@
 package areas;
 
+import animals.Animal;
+
 import java.util.ArrayList;
 
 public class Cage extends Area implements IArea {
 
     int id;
     String name;
-    int number;
+    int number; // This number refer to the current number of objects in Cage.
     ArrayList<IArea> adjacent;
     //public int id;
 
     public Cage(String name) {
         super(name);
         number = 0;
+        habitat = true;
+        listOfInhabitants = new ArrayList<>();
+    }
+
+    @Override
+    public void addAnimal(Animal animal) {
+        listOfInhabitants.add(animal);
+        ++number;
+    }
+
+    @Override
+    public void getAnimal() {
+        for(Animal list : listOfInhabitants) {
+            System.out.println(list.getNickname());
+        }
     }
 
     public int getNumber() { return number;}
@@ -35,5 +52,15 @@ public class Cage extends Area implements IArea {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public boolean IsCompatibleWithInhabitants(Animal animal) {
+        for(Animal list : listOfInhabitants) {
+            if(!animal.isCompatibleWith(list)) {
+                return false;
+            }
+        }
+        return true;
     }
 }

@@ -21,15 +21,12 @@ public class Buzzards extends Animal{
 
     @Override
     public boolean isCompatibleWith(Animal animal) {
-        return false;
+        return animal instanceof Buzzards || animal instanceof Parrots;
     }
 
     @Override
     public boolean isNotHabitat(IArea area) {
-        if(area instanceof PicnicArea || area instanceof Entrance) {
-            return true;
-        }
-        return false;
+        return area instanceof PicnicArea || area instanceof Entrance;
     }
 
     @Override

@@ -1,5 +1,7 @@
 package areas;
 
+import animals.Animal;
+
 import java.util.ArrayList;
 
 public class Entrance extends Area implements IArea {
@@ -11,9 +13,17 @@ public class Entrance extends Area implements IArea {
     public Entrance(String name) {
         super(name);
         id = 0;
+        habitat = false;
     }
 
-    //public int getId() { return id; }
+    @Override
+    public void addAnimal(Animal animal) {
+
+    }
+
+    @Override
+    public void getAnimal() {}
+
 
     @Override
     public ArrayList<Integer> getAdjacentAreas() {
@@ -22,6 +32,11 @@ public class Entrance extends Area implements IArea {
 
     @Override
     public boolean isFull() {
+        return false;
+    }
+
+    @Override
+    public boolean IsCompatibleWithInhabitants(Animal animal) {
         return false;
     }
 }

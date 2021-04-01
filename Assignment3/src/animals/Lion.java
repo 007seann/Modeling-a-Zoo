@@ -18,10 +18,7 @@ public class Lion extends Animal {
 
     @Override
     public boolean isCompatibleWith(Animal animal) {
-        if (animal instanceof Zebra || animal instanceof Gazelles) {
-            return false;
-        }
-        return (animal instanceof Lion);
+        return animal instanceof Lion;
     }
 
     @Override
