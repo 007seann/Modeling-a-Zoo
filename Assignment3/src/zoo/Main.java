@@ -8,7 +8,15 @@ public class Main {
     public static void main(String[] args) {
 
         Zoo z = new Zoo();
+        Entrance e = new Entrance("Love");
+        PicnicArea p = new PicnicArea("Faith");
+        int e1 = z.addArea(e);
+        int p1 = z.addArea(p);
+        z.connectAreas(e1, p1);
 
+
+
+        /*
         Entrance a6 = new Entrance("WelcomeWorld");
         int en1 = z.addArea(a6);
         System.out.println(en1);
@@ -47,8 +55,8 @@ public class Main {
         System.out.println(z.addAnimal(p2, s2));
         //System.out.println(z.addAnimal());
         System.out.println();
-        a3.getAnimal();
-        b3.getAnimal();
+        a3.getAnimalFromArea();
+        b3.getAnimalFromArea();
        // System.out.println(z.addAnimal(p2, s2));
         //System.out.println(z.animals.get(0).getNickname());
         //System.out.println(s1.isCompatibleWithArea(a3, s1));
@@ -69,7 +77,7 @@ public class Main {
         System.out.println(z.addAnimal(c1, bu1));
         System.out.println(z.addAnimal(c1, bu2));
         System.out.println(z.addAnimal(c1, pa2));
-        a4.getAnimal();
+        a4.getAnimalFromArea();
         System.out.println();
 
         System.out.println(c1);
@@ -94,8 +102,7 @@ public class Main {
         System.out.println(c2);
         System.out.println(z.getArea(c2));
 
-
-
+         */
 
 
     }

@@ -10,26 +10,29 @@ public class Cage extends Area implements IArea {
     String name;
     int number; // This number refer to the current number of objects in Cage.
     ArrayList<IArea> adjacent;
-    //public int id;
+
+
 
     public Cage(String name) {
         super(name);
         number = 0;
         habitat = true;
         listOfInhabitants = new ArrayList<>();
+        adjacent = new ArrayList<>();
     }
 
     @Override
-    public void addAnimal(Animal animal) {
+    public void addAnimalToArea(Animal animal) {
         listOfInhabitants.add(animal);
         ++number;
     }
 
     @Override
-    public void getAnimal() {
+    public String getAnimalFromArea() {
         for(Animal list : listOfInhabitants) {
             System.out.println(list.getNickname());
         }
+        return null;
     }
 
     public int getNumber() { return number;}
@@ -40,6 +43,17 @@ public class Cage extends Area implements IArea {
     public ArrayList<Integer> getAdjacentAreas() {
         return null;
     }
+
+    /*
+    @Override
+    public void relationship() {
+        if (!adjacent.add(enclosure)) {
+            adjacent.add(cage);
+        }
+
+    }
+
+     */
 
     /**
      * The maximum number of Cage is 3.

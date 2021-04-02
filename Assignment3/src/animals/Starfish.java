@@ -21,13 +21,6 @@ public class Starfish extends Animal{
         return animal instanceof Sharks || animal instanceof Starfish || animal instanceof Seals;
     }
 
-    @Override
-    public boolean isNotHabitat(IArea area) {
-        if(area instanceof PicnicArea || area instanceof Entrance) {
-            return true;
-        }
-        return false;
-    }
 
     @Override
     public boolean canLiveIn(IArea area) {
@@ -37,25 +30,6 @@ public class Starfish extends Animal{
         return false;
     }
 
-    @Override
-    public boolean isWrongHabitat(IArea area) {
-        if(area instanceof Cage || area instanceof Enclosure) {
-            return true;
-        }
-        return false;
-    }
 
-
-    /**
-     * @param area which refers to the habitat with its current occupants.
-     * @param animal which refers to the animal occupant in the habitat.
-     */
-    @Override
-    public boolean isCompatibleWithArea(IArea area, Animal animal) {
-        if( area instanceof Aquarium && isCompatibleWith(animal) ) {
-            return true;
-        }
-        return false;
-    }
 
 }

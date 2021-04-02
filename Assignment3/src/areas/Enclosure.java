@@ -16,19 +16,22 @@ public class Enclosure extends Area implements IArea {
         number = 0;
         habitat = true;
         listOfInhabitants = new ArrayList<>();
+        //picnicArea = new PicnicArea(name);
+        adjacent = new ArrayList<>();
     }
 
     @Override
-    public void addAnimal(Animal animal) {
+    public void addAnimalToArea(Animal animal) {
         listOfInhabitants.add(animal);
         ++number;
     }
 
     @Override
-    public void getAnimal() {
+    public String getAnimalFromArea() {
         for(Animal list : listOfInhabitants) {
             System.out.println(list.getNickname());
         }
+        return null;
     }
 
     public int getNumber() {
@@ -41,7 +44,14 @@ public class Enclosure extends Area implements IArea {
     public ArrayList<Integer> getAdjacentAreas() {
         return null;
     }
+/*
+    @Override
+    public void relationship() {
+        adjacent.add(enclosure);
+    }
 
+
+ */
     /**
      * The maximum number of Enclosure is 3.
      * @return true for when the number of animal objects in Enclosure is greater than or equal to 3.

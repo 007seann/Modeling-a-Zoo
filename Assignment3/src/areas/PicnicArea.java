@@ -10,25 +10,38 @@ public class PicnicArea extends Area implements IArea {
     String name;
     ArrayList<IArea> adjacent;
 
+
     public PicnicArea(String name) {
         super(name);
         habitat = false;
+        adjacent = new ArrayList<>();
     }
 
     @Override
-    public void addAnimal(Animal animal) {
+    public void addAnimalToArea(Animal animal) {
 
     }
 
     @Override
-    public void getAnimal() {}
+    public String getAnimalFromArea() {
+        return null;
+    }
 
 
     @Override
     public ArrayList<Integer> getAdjacentAreas() {
         return null;
     }
+/*
+    @Override
+    public void relationship() {
+        if (!adjacent.add(picnicArea)) {
+            adjacent.add(aquarium);
+        }
+    }
 
+
+ */
     @Override
     public boolean isFull() {
         return false;

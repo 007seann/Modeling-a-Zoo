@@ -12,19 +12,21 @@ public class Zoo implements IZoo{
 
     static int lastID;
     static final int entranceID = 0;
-    ArrayList<Integer> areaIDs;
+    //ArrayList<Integer> areaIDs;
     ArrayList<String> areaNames;
     ArrayList<Area> areas;
     ArrayList<Animal> animals;
+    ArrayList<String> allNameLists;
     int areaIndex;
-   // Area area;
+
 
 
 
     Zoo() {
-        areaIDs = new ArrayList<>();
+        //areaIDs = new ArrayList<>();
         areas = new ArrayList<>();
         animals = new ArrayList<>();
+        allNameLists = new ArrayList<>();
         lastID = 1;
         int code = 0;
         areaIndex = 0;
@@ -61,12 +63,14 @@ public class Zoo implements IZoo{
 
     @Override
     public void removeArea(int areaId) {
-
+        Area area = (Area) getArea(areaId);
         for(int i = 0; i < areas.size(); i++) {
-            if(areas.get(i) == getArea(areaId))
-                //break;
+            if(areas.get(i) == getArea(areaId)) {
                 areas.remove(i);
+                area.nextAreas.remove(areaId);
                 return;
+            }
+                //break;
         }
 
     }
@@ -130,7 +134,7 @@ public class Zoo implements IZoo{
         for(Area areaElements : areas) {
             if(areaElements.getId() == areaId) {
                 assert area != null;
-                area.addAnimal(animal);
+                area.addAnimalToArea(animal);
             }
         }
         animals.add(animal);
@@ -143,21 +147,31 @@ public class Zoo implements IZoo{
     public boolean checkHabitat(int areaId, Animal animal) {
         if(animal )
     }
-
+그럼
      */
     @Override
     public void connectAreas(int fromAreaId, int toAreaId) {
-
+        Area fromArea = (Area) getArea(fromAreaId);
+        fromArea.nextAreas.add(toAreaId);
     }
 
     @Override
     public boolean isPathAllowed(ArrayList<Integer> areaIds) {
-        return false;
+        Area area = (Area) getArea(areaIds.get(0));
+        return areaIds == area.getAdjacentAreas();
     }
 
     @Override
     public ArrayList<String> visit(ArrayList<Integer> areaIdsVisited) {
-        return null;
+        if (!isPathAllowed(areaIdsVisited)) {
+            return null;
+        }
+
+        for (Integer areaId : areaIdsVisited) {
+            Area area = (Area) getArea(areaId);
+            allNameLists.add(area.getAnimalFromArea());
+        }
+        return allNameLists;
     }
 
     @Override

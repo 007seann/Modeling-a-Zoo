@@ -12,25 +12,28 @@ public class Aquarium extends Area implements IArea{
     ArrayList<IArea> adjacent;
 
 
+
     public Aquarium(String name) {
         super(name);
         number = 0;
         habitat = true;
         listOfInhabitants = new ArrayList<>();
+        adjacent = new ArrayList<>();
     }
 
 
     @Override
-    public void addAnimal(Animal animal) {
+    public void addAnimalToArea(Animal animal) {
          listOfInhabitants.add(animal);
          ++number;
     }
 
     @Override
-    public void getAnimal() {
+    public String getAnimalFromArea() {
         for(Animal list : listOfInhabitants) {
             System.out.println(list.getNickname());
         }
+        return null;
     }
 
     public int getNumber() { return number;}
@@ -40,6 +43,17 @@ public class Aquarium extends Area implements IArea{
     public ArrayList<Integer> getAdjacentAreas() {
         return null;
     }
+
+    /*
+    @Override
+    public void relationship() {
+        if (!adjacent.add(aquarium)) {
+            adjacent.add(cage);
+        }
+
+    }
+
+     */
 
     /**
      * The maximum number of Aquarium is 3.

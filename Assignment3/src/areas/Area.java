@@ -7,21 +7,22 @@ import java.util.ArrayList;
 public abstract class Area implements IArea {
 
     boolean habitat;
-    int id;
-    String name;
-    ArrayList<Integer> adjacentAreas;
+    protected int id;
+    protected String name;
+    public ArrayList<Integer> nextAreas;
     ArrayList<Animal> listOfInhabitants;
 
     public Area(String name) {
         this.name = name;
         listOfInhabitants = new ArrayList<>();
+        nextAreas = new ArrayList<>();
     }
 
     public boolean isHabitat() { return habitat; }
 
-    public abstract void addAnimal(Animal animal);
+    public abstract void addAnimalToArea(Animal animal);
 
-    public abstract void getAnimal();
+    public abstract String getAnimalFromArea();
 
     public int getId() {
         return id;
@@ -40,22 +41,15 @@ public abstract class Area implements IArea {
     }
 
     void addAdjacent(Area area) {
-        adjacentAreas.add(area.getId());
+        nextAreas.add(area.getId());
     }
 
     public ArrayList<Integer> getAdjacentAreas() {
-        return adjacentAreas;
+        return nextAreas;
     }
 
-    /*
-    public boolean isHabitat(IArea area) {
-        if(area instanceof PicnicArea || area instanceof Entrance) {
-            return false;
-        }
-        return true;
-    }
+    //public abstract void relationship(Area area);
 
-     */
 
     public abstract boolean isFull();
 
