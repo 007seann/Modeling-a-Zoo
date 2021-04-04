@@ -68,6 +68,7 @@ public class Zoo implements IZoo{
             if(areas.get(i) == getArea(areaId)) {
                 areas.remove(i);
                 area.nextAreas.remove(areaId);
+                area.prevAreas.remove(areaId);
                 return;
             }
                 //break;
@@ -152,7 +153,9 @@ public class Zoo implements IZoo{
     @Override
     public void connectAreas(int fromAreaId, int toAreaId) {
         Area fromArea = (Area) getArea(fromAreaId);
+        Area toArea = (Area) getArea(toAreaId);
         fromArea.nextAreas.add(toAreaId);
+        toArea.prevAreas.add(fromAreaId);
     }
 
     @Override
@@ -166,7 +169,6 @@ public class Zoo implements IZoo{
         if (!isPathAllowed(areaIdsVisited)) {
             return null;
         }
-
         for (Integer areaId : areaIdsVisited) {
             Area area = (Area) getArea(areaId);
             allNameLists.add(area.getAnimalFromArea());
@@ -176,7 +178,11 @@ public class Zoo implements IZoo{
 
     @Override
     public ArrayList<Integer> findUnreachableAreas() {
-        return null;
+        /*for(int i=0; i<areas.size(); i++) {
+            areas.get(i)
+        }
+
+         */
     }
 
     @Override

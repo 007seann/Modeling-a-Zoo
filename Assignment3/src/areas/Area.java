@@ -10,12 +10,14 @@ public abstract class Area implements IArea {
     protected int id;
     protected String name;
     public ArrayList<Integer> nextAreas;
+    public ArrayList<Integer> prevAreas;
     ArrayList<Animal> listOfInhabitants;
 
     public Area(String name) {
         this.name = name;
         listOfInhabitants = new ArrayList<>();
         nextAreas = new ArrayList<>();
+        prevAreas = new ArrayList<>();
     }
 
     public boolean isHabitat() { return habitat; }
