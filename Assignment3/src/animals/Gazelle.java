@@ -2,11 +2,11 @@ package animals;
 
 import areas.*;
 
-public class Gazelles extends Animal {
+public class Gazelle extends Animal {
 
     private final String nickName;
 
-    public Gazelles(String nickName) {
+    public Gazelle(String nickName) {
         this.nickName = nickName;
 
     }
@@ -18,7 +18,7 @@ public class Gazelles extends Animal {
 
     @Override
     public boolean isCompatibleWith(Animal animal) {
-        return animal instanceof Zebra || animal instanceof Gazelles;
+        return animal instanceof Zebra || animal instanceof Gazelle;
     }
 
 

@@ -11,12 +11,12 @@ public class Entrance extends Area implements IArea {
     ArrayList<Area> adjacent;
     //PicnicArea picnicArea;
 
-    public Entrance(String name) {
-        super(name);
+    public Entrance() {
+        super();
         id = 0;
         habitat = false;
-        //picnicArea = new PicnicArea(name);
-        //adjacent.add(picnicArea);
+        adjacent = new ArrayList<>();
+
     }
 
     @Override

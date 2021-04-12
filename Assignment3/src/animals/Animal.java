@@ -9,18 +9,7 @@ import areas.IArea;
  */
 public abstract class Animal
 {
-	/*
-	protected static Buzzards buzzards;
-	protected static Parrots parrots;
-	protected static Gazelles gazelles;
-	protected static Lion lion;
-	protected static Zebra zebra;
-	protected static Starfish starfish;
-	protected static Sharks sharks;
-	protected static Seals seals;
 
-
-	 */
 	/**
 	 * @return Returns this animal's given name.
 	 */

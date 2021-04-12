@@ -10,9 +10,8 @@ public class PicnicArea extends Area implements IArea {
     String name;
     ArrayList<IArea> adjacent;
 
-
-    public PicnicArea(String name) {
-        super(name);
+    public PicnicArea() {
+        super();
         habitat = false;
         adjacent = new ArrayList<>();
     }
@@ -32,16 +31,7 @@ public class PicnicArea extends Area implements IArea {
     public ArrayList<Integer> getAdjacentAreas() {
         return null;
     }
-/*
-    @Override
-    public void relationship() {
-        if (!adjacent.add(picnicArea)) {
-            adjacent.add(aquarium);
-        }
-    }
 
-
- */
     @Override
     public boolean isFull() {
         return false;

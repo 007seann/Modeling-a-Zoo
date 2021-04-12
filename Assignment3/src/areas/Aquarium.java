@@ -13,7 +13,7 @@ public class Aquarium extends Area implements IArea{
 
 
 
-    public Aquarium(String name) {
+    public Aquarium(int name) {
         super(name);
         number = 0;
         habitat = true;

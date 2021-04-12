@@ -4,6 +4,7 @@ import animals.Animal;
 import areas.Area;
 import areas.Entrance;
 import areas.IArea;
+import dataStructures.CashCount;
 import dataStructures.ICashCount;
 
 import java.util.ArrayList;
@@ -12,24 +13,52 @@ public class Zoo implements IZoo{
 
     static int lastID;
     static final int entranceID = 0;
-    //ArrayList<Integer> areaIDs;
-    ArrayList<String> areaNames;
+    ArrayList<Integer> areaIDs;
+    //ArrayList<String> areaNames;
     ArrayList<Area> areas;
     ArrayList<Animal> animals;
     ArrayList<String> allNameLists;
-    int areaIndex;
+    //ArrayList<Integer> unvisited;
+    //int entranceFee;
+    public int entrancePounds;
+    public int entrancePence;
+    // cashCount means total money Zoo own.
+    CashCount cashCount;
+    double entranceFee;
+
+
+
+    //int areaIndex;
+    //boolean pathPermission;
+    //static int[][] map;
+    //static boolean[] visit;
+    //static int n;
+    //ArrayList<Integer> unReachableAreaIDs;
 
 
 
 
-    Zoo() {
+
+    public Zoo() {
         //areaIDs = new ArrayList<>();
         areas = new ArrayList<>();
         animals = new ArrayList<>();
         allNameLists = new ArrayList<>();
-        lastID = 1;
-        int code = 0;
-        areaIndex = 0;
+        areaIDs = new ArrayList<>();
+        lastID = 0;
+        //entranceFee = pound + "." + pence;
+        entrancePounds = 0;
+        entrancePence = 0;
+        cashCount = new CashCount();
+        //entranceFee = 0;
+        //unvisited = new ArrayList<Integer>();
+        entranceFee = 0;
+
+       //n = 0; ;// the number of nodes.
+       // map = new int[n+1][n+1]; // 인접 행렬 (인덱스 활용하기 위해 +1)
+       // visit = new boolean[n+1]; // 방문여부
+        // int code = 0;
+        //areaIndex = 0;
 
 
     }
@@ -42,6 +71,7 @@ public class Zoo implements IZoo{
             Area areaObject = (Area) area;
             areaObject.setId(entranceID);
             areas.add((Area) area);
+            areaIDs.add(entranceID);
             return entranceID;
         }
             // Create a new id by increasing the global/static id
@@ -55,6 +85,7 @@ public class Zoo implements IZoo{
 
             //append the area to the current container
             areas.add((Area) area);
+            areaIDs.add(lastID);
 
 
         //return the current Id for the area
@@ -64,14 +95,19 @@ public class Zoo implements IZoo{
     @Override
     public void removeArea(int areaId) {
         Area area = (Area) getArea(areaId);
-        for(int i = 0; i < areas.size(); i++) {
-            if(areas.get(i) == getArea(areaId)) {
-                areas.remove(i);
-                area.nextAreas.remove(areaId);
-                area.prevAreas.remove(areaId);
-                return;
-            }
-                //break;
+        assert(area != null);
+
+        //Remove it from areas
+        areas.remove(area);
+
+        //Remove it from its prev's next
+        for(Area prev : area.prevAreas) {
+            prev.nextAreas.remove(area);
+        }
+
+        //Remove it from its next's prev
+        for(Area next : area.nextAreas) {
+            next.prevAreas.remove(area);
         }
 
     }
@@ -84,28 +120,14 @@ public class Zoo implements IZoo{
     @Override
     public IArea getArea(int areaId) {
 
-        /*
-           for(IArea area : areas) {
-     if ((Area area).getId() == areadId) {
-         */
-        if( areaId == 0 ) {
-            return areas.get(lastID - 1);
-        }
-
         for(Area area : areas) {
             if(area.getId() == areaId) {
                 return area;
             }
         }
-        /*
-        for(int i = 0; i < areas.size(); i++) {
-            if(areas.get(i).getId() == areaId)
-               areaIndex = i;
-        }
-        return areas.get(areaIndex);
-
-         */return null;
+      return null;
     }
+
 
     @Override
     public byte addAnimal(int areaId, Animal animal) {
@@ -144,31 +166,42 @@ public class Zoo implements IZoo{
 
     }
 
-    /*
-    public boolean checkHabitat(int areaId, Animal animal) {
-        if(animal )
-    }
-그럼
-     */
     @Override
     public void connectAreas(int fromAreaId, int toAreaId) {
+
+        //Get fromArea
         Area fromArea = (Area) getArea(fromAreaId);
+        assert(fromArea != null);
+
+        //Get Area
         Area toArea = (Area) getArea(toAreaId);
-        fromArea.nextAreas.add(toAreaId);
-        toArea.prevAreas.add(fromAreaId);
+        assert(toArea != null);
+
+        //Splice them
+        fromArea.nextAreas.add(toArea);
+        toArea.prevAreas.add(fromArea);
     }
 
     @Override
     public boolean isPathAllowed(ArrayList<Integer> areaIds) {
-        Area area = (Area) getArea(areaIds.get(0));
-        return areaIds == area.getAdjacentAreas();
+
+        for (int i=0; i<areas.size(); i++){
+            Area areaInput = (Area) getArea(areaIds.get(i));
+            if (areas.get(i).nextAreas != areaInput.nextAreas) {
+                return false;
+            }
+        }
+        return true;
     }
+
+
 
     @Override
     public ArrayList<String> visit(ArrayList<Integer> areaIdsVisited) {
         if (!isPathAllowed(areaIdsVisited)) {
             return null;
         }
+
         for (Integer areaId : areaIdsVisited) {
             Area area = (Area) getArea(areaId);
             allNameLists.add(area.getAnimalFromArea());
@@ -178,30 +211,105 @@ public class Zoo implements IZoo{
 
     @Override
     public ArrayList<Integer> findUnreachableAreas() {
-        /*for(int i=0; i<areas.size(); i++) {
-            areas.get(i)
+        // Copy all areaID
+        ArrayList<Integer> unvisited = new ArrayList<>();
+        for (Area a : areas) {
+            unvisited.add(a.getId());
         }
 
-         */
+        // Get entry
+        Area e = (Area) getArea(0);
+        visit(e,unvisited);
+
+        return unvisited;
+
     }
+
+    void visit(Area a, ArrayList<Integer> unvisited) {
+        // if a (area) does not exist in unvisited (it's already visited), just return
+        if(!unvisited.contains(a.getId()))
+            return;
+
+        //Mark it's visited -- remove it from unvisited
+        unvisited.remove(Integer.valueOf(a.getId()));
+
+        //Visit its next area recursively.
+        for (Area n : a.nextAreas){
+            visit(n, unvisited);
+        }
+    }
+
+
+
+      /*
+        Area area = (Area) getArea(areaIDs.get(0));
+        for(int i=0; i<areaIDs.size(); i++) {
+            for(int j=0; j<area.nextAreas.size(); j++) {
+                if(!areaIDs.get(i).equals(area.nextAreas.get(j))) {
+                    unReachableAreaIDs.add(i);
+                }
+            }
+        }
+        return unReachableAreaIDs;
+    }
+
+       */
 
     @Override
     public void setEntranceFee(int pounds, int pence) {
-
+        entrancePounds = pounds;
+        entrancePence = pence;
     }
+
+    public int getEntrancePounds() {
+        return entrancePounds;
+    }
+    public int getEntrancePence() {
+        return entrancePence;
+    }
+
 
     @Override
     public void setCashSupply(ICashCount coins) {
-
+        this.cashCount = (CashCount) coins;
     }
 
     @Override
     public ICashCount getCashSupply() {
-        return null;
+        return cashCount;
     }
 
     @Override
     public ICashCount payEntranceFee(ICashCount cashInserted) {
-        return null;
+        CashCount moneyInserted = (CashCount) cashInserted;
+
+        // Corner cases
+
+
+        // totalMoney += cashInserted;
+        cashCount = CashCount.add(cashCount, moneyInserted);
+
+        // return cashInserted - entranceFee;
+        double returnValue = CashCount.subtract(moneyInserted, entranceFee);
+
+        // Update totalMoney by subtracting returnValue;
+        return cashCount.pay(returnValue);
+
     }
+/*
+    CashCount payEntranceFee(CashCount cashInserted) {
+        //totalMoney += cashInserted;
+        cashCount = CashCount.add(cashCount, cashInserted);
+
+        //return cashInserted - entranceFee;
+        double returnValue = CashCount.subtract(cashInserted, entranceFee);
+
+        //Update totalMoney by subtracting returnValue;
+        return cashCount.pay(returnValue);
+    }
+
+
+ */
+
 }
+

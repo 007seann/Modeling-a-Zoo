@@ -2,12 +2,12 @@ package animals;
 
 import areas.*;
 
-public class Parrots extends Animal{
+public class Parrot extends Animal{
 
     private final String nickName;
 
 
-    public Parrots(String nickName) {
+    public Parrot(String nickName) {
         this.nickName = nickName;
 
     }
@@ -18,7 +18,7 @@ public class Parrots extends Animal{
     }
 
     public boolean isCompatibleWith(Animal animal) {
-        return animal instanceof Parrots || animal instanceof Buzzards;
+        return animal instanceof Parrot || animal instanceof Buzzard;
     }
 
 

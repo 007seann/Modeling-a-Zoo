@@ -13,7 +13,7 @@ public class Cage extends Area implements IArea {
 
 
 
-    public Cage(String name) {
+    public Cage(int name) {
         super(name);
         number = 0;
         habitat = true;

@@ -11,12 +11,11 @@ public class Enclosure extends Area implements IArea {
     int number; // This number refer to the current number of objects in Enclosure.
     ArrayList<IArea> adjacent;
 
-    public Enclosure(String name) {
+    public Enclosure(int name) {
         super(name);
         number = 0;
         habitat = true;
         listOfInhabitants = new ArrayList<>();
-        //picnicArea = new PicnicArea(name);
         adjacent = new ArrayList<>();
     }
 

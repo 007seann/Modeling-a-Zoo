@@ -2,24 +2,179 @@ package zoo;
 
 import animals.*;
 import areas.*;
+import dataStructures.CashCount;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Main {
 
     public static void main(String[] args) {
 
         Zoo z = new Zoo();
+        System.out.println(z.cashCount);
+        CashCount p1 = new CashCount();
+        p1.setNrNotes_20pounds(2);
+        p1.setNrNotes_10pounds(1);
+        p1.setNrNotes_5pounds(3);
+        p1.setNrCoins_2pounds(1);
+        p1.setNrCoins_1pound(17);
+        p1.setNrCoins_50p(1);
+        p1.setNrCoins_20p(1);
+
+        System.out.println(p1.getNrNotes_5pounds());
+        System.out.println();
+        System.out.println(p1.pay(85).getNrNotes_20pounds());
+        System.out.println(p1.pay(85).getNrNotes_5pounds());
+
+
+       // System.out.println(z.payEntranceFee(p1).getNrCoins_1pound());
+        //System.out.println(z.cashCount.getNrCoins_1pound());
+        //System.out.println(CashCount.add(z.cashCount, p1));
+
+
+        /*
+        Cage c = new Cage("Movement");
+        int c1 = z.addArea(c);
+        Parrot pa1 = new Parrot("Pizontoo");
+        Buzzard bu1 = new Buzzard("Vaseline");
+        z.addAnimal(c1, pa1);
+        z.addAnimal(c1, bu1);
+
+        Aquarium a = new Aquarium("OceanWorld");
+        int aq1 = z.addArea(a);
+        Seal s1 = new Seal("Miki");
+        z.addAnimal(aq1, s1);
+
+         */
+/*
+        Aquarium a = new Aquarium("OceanWorld");
+        int aq1 = z.addArea(a);
+        Seal s1 = new Seal("Miki");
+        z.addAnimal(aq1, s1);
+
+        Cage c = new Cage("Movement");
+        int c1 = z.addArea(c);
+
+        Enclosure a5 = new Enclosure("BigDog");
+        Enclosure b5 = new Enclosure("BigDog");
+        Zebra z1 = new Zebra("HandCream");
+        Lion l1 = new Lion("JesusChrist");
+        int e1 = z.addArea(a5);
+        int e2 = z.addArea(b5);
+        z.addAnimal(e1, z1);
+        z.connectAreas(c1, aq1);
+        z.connectAreas(aq1, e1);
+        System.out.println();
+        c.print();
+        a.print();
+        a5.print();
+        System.out.println();
+        c.printPrev();
+        a.printPrev();
+        a5.printPrev();
+
+
+ */
+
+
+
+/*
+        ArrayList<Integer> temp = new ArrayList<>();
+        temp.add(1);
+        temp.add(2);
+        //temp.add(3);
+        System.out.println(z.visit(temp));
+        System.out.println();
+        System.out.println(z.isPathAllowed(temp));
+
+ */
+
+/*
         Entrance e = new Entrance("Love");
-        PicnicArea p = new PicnicArea("Faith");
         int e1 = z.addArea(e);
+        System.out.println(e1);
+
+        PicnicArea p = new PicnicArea("Faith");
         int p1 = z.addArea(p);
+        System.out.println(p1);
+
+        Enclosure en = new Enclosure("Hope");
+        int en1 = z.addArea(en);
+        System.out.println(en1);
+
+
+        Cage c = new Cage("WhatTheFuck");
+        int c1 = z.addArea(c);
+        System.out.println(c1);
+        Parrot pa1 = new Parrot("Pizontoo");
+        Buzzard bu1 = new Buzzard("Vaseline");
+        Buzzard bu2 = new Buzzard("Vasil");
+        Parrot pa2 = new Parrot("Bluejean");
+        z.addAnimal(c1, pa1);
+        z.addAnimal(c1, pa2);
+        z.addAnimal(c1, bu1);
+        z.addAnimal(c1, bu2);
+
+        Aquarium a = new Aquarium("OceanWorld");
+        int aq1 = z.addArea(a);
+        System.out.println(aq1);
+        Seal s1 = new Seal("Miki");
+        Seal s2 = new Seal("Maka");
+        Seal s3 = new Seal("MakaBro");
+        z.addAnimal(aq1, s1);
+        z.addAnimal(aq1, s2);
+        z.addAnimal(aq1, s3);
+
+        Aquarium a2 = new Aquarium("Disney");
+        int aq2  = z.addArea(a2);
+        System.out.println(aq2);
+
+        Cage ca = new Cage("Nicol");
+        int c2 = z.addArea(ca);
+
+
+
+
+        //System.out.println(p1);
+        //System.out.println(z.getArea(p1));
         z.connectAreas(e1, p1);
+        z.connectAreas(p1, en1);
+        z.connectAreas(en1, c1);
+        z.connectAreas(c1, aq1);
+        z.connectAreas(c1, aq2);
+        z.connectAreas(c2, aq1);
+        e.print();
+        p.print();
+        en.print();
+        c.print();
+        a.print();
+        a2.print();
+        System.out.println();
+        e.printPrev();
+        p.printPrev();
+        en.printPrev();
+        c.printPrev();
+        a.printPrev();
+        a2.printPrev();
+        //en.printPrev();
+        System.out.println();
+        //System.out.println(visit);
+
+        System.out.println();
+        System.out.println(z.findUnreachableAreas());
+
+
+
+ */
+
 
 
 
         /*
         Entrance a6 = new Entrance("WelcomeWorld");
         int en1 = z.addArea(a6);
-        System.out.println(en1);
+        System.out.println(en1);rkfu
         System.out.println(z.getArea(en1));
         System.out.println();
 
