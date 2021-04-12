@@ -16,6 +16,7 @@ public abstract class Area implements IArea {
     //List of prev areas
     public ArrayList<Area> prevAreas;
     ArrayList<Animal> listOfInhabitants;
+    int maximum;
 
 
 
@@ -49,6 +50,10 @@ public abstract class Area implements IArea {
         System.out.println();
     }
     public boolean isHabitat() { return habitat; }
+
+    public void setMaximum(int maximum) { this.maximum = maximum; }
+    public int getMaximum() { return maximum; }
+
 
     public abstract void addAnimalToArea(Animal animal);
 
@@ -85,6 +90,7 @@ public abstract class Area implements IArea {
 
 
     public abstract boolean isFull();
+
 
 
     public abstract boolean IsCompatibleWithInhabitants(Animal animal);

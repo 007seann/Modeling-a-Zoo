@@ -9,8 +9,8 @@ public class Aquarium extends Area implements IArea{
     int id;
     String name;
     int number; // This number refer to the current number of objects in Aquarium.
+    //int maximum;
     ArrayList<IArea> adjacent;
-
 
 
     public Aquarium(int name) {
@@ -19,6 +19,7 @@ public class Aquarium extends Area implements IArea{
         habitat = true;
         listOfInhabitants = new ArrayList<>();
         adjacent = new ArrayList<>();
+
     }
 
 
@@ -44,17 +45,6 @@ public class Aquarium extends Area implements IArea{
         return null;
     }
 
-    /*
-    @Override
-    public void relationship() {
-        if (!adjacent.add(aquarium)) {
-            adjacent.add(cage);
-        }
-
-    }
-
-     */
-
     /**
      * The maximum number of Aquarium is 3.
      * @return true for when the number of animal objects in Aquarium is greater than or equal to 3.
@@ -62,10 +52,7 @@ public class Aquarium extends Area implements IArea{
      */
     @Override
     public boolean isFull() {
-        if(getNumber() >= 3) {
-            return true;
-        }
-        return false;
+        return getNumber() >= getMaximum();
     }
 
     @Override

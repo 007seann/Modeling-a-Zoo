@@ -11,7 +11,65 @@ public class Main {
 
     public static void main(String[] args) {
 
+        /*
+        // Test for an entrance with ID zero.
         Zoo z = new Zoo();
+        Cage c = new Cage(1);
+        int c1 = z.addArea(c);
+        System.out.println(c1);
+
+        Entrance e = new Entrance();
+        int e1 = z.addArea(e);
+        System.out.println(e1);
+
+        Aquarium a = new Aquarium(2);
+        int a1 = z.addArea(a);
+        System.out.println(a1);
+
+         */
+
+
+        // Test for an Aquarium.
+        Zoo z = new Zoo();
+        // Test for an entrance with ID zero.
+        Cage c = new Cage(1);
+        c.setMaximum(3);
+        int c1 = z.addArea(c);
+        //System.out.println(c1);
+
+        Parrot p1 = new Parrot("P1");
+        Parrot p2 = new Parrot("P2");
+        Parrot p3 = new Parrot("P3");
+        Parrot p4 = new Parrot("P4");
+        System.out.println(z.addAnimal(c1, p1));
+        System.out.println(z.addAnimal(c1, p2));
+        System.out.println(z.addAnimal(c1, p3));
+        System.out.println(z.addAnimal(c1, p4));
+        System.out.println();
+
+
+        Entrance e = new Entrance();
+        int e1 = z.addArea(e);
+        //System.out.println(e1);
+
+        Aquarium a = new Aquarium(2);
+        int a1 = z.addArea(a);
+        a.setMaximum(4);
+        //System.out.println(a1);
+
+        Shark s1 = new Shark("SK");
+        Shark s2 = new Shark("SQ");
+        Shark s3 = new Shark("SW");
+        Starfish star1 = new Starfish("Star");
+
+        System.out.println(z.addAnimal(a1, s1));
+        System.out.println(z.addAnimal(a1, star1));
+        System.out.println(z.addAnimal(a1, s2));
+        System.out.println(z.addAnimal(a1, s3));
+        //z.addAnimal(a1, star1);
+
+
+        /*
         System.out.println(z.cashCount);
         CashCount p1 = new CashCount();
         p1.setNrNotes_20pounds(2);
@@ -32,6 +90,8 @@ public class Main {
         //System.out.println(z.cashCount.getNrCoins_1pound());
         //System.out.println(CashCount.add(z.cashCount, p1));
 
+
+         */
 
         /*
         Cage c = new Cage("Movement");

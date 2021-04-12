@@ -10,6 +10,7 @@ public class Cage extends Area implements IArea {
     String name;
     int number; // This number refer to the current number of objects in Cage.
     ArrayList<IArea> adjacent;
+    //int maximum;
 
 
 
@@ -19,6 +20,8 @@ public class Cage extends Area implements IArea {
         habitat = true;
         listOfInhabitants = new ArrayList<>();
         adjacent = new ArrayList<>();
+
+
     }
 
     @Override
@@ -44,17 +47,6 @@ public class Cage extends Area implements IArea {
         return null;
     }
 
-    /*
-    @Override
-    public void relationship() {
-        if (!adjacent.add(enclosure)) {
-            adjacent.add(cage);
-        }
-
-    }
-
-     */
-
     /**
      * The maximum number of Cage is 3.
      * @return true for when the number of animal objects in Cage is greater than or equal to 3.
@@ -62,10 +54,7 @@ public class Cage extends Area implements IArea {
      */
     @Override
     public boolean isFull() {
-        if(getNumber() >= 3) {
-            return true;
-        }
-        return false;
+        return getNumber() >= getMaximum();
     }
 
     @Override

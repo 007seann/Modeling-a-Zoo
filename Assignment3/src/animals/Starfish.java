@@ -24,7 +24,7 @@ public class Starfish extends Animal{
 
     @Override
     public boolean canLiveIn(IArea area) {
-        if(area instanceof Starfish) {
+        if(area instanceof Aquarium) {
             return true;
         }
         return false;

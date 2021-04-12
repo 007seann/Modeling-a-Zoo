@@ -10,6 +10,7 @@ public class Enclosure extends Area implements IArea {
     String name;
     int number; // This number refer to the current number of objects in Enclosure.
     ArrayList<IArea> adjacent;
+    //int maximum;
 
     public Enclosure(int name) {
         super(name);
@@ -39,6 +40,7 @@ public class Enclosure extends Area implements IArea {
 
 
 
+
     @Override
     public ArrayList<Integer> getAdjacentAreas() {
         return null;
@@ -58,10 +60,7 @@ public class Enclosure extends Area implements IArea {
      */
     @Override
     public boolean isFull() {
-        if(getNumber() >= 3) {
-            return true;
-        }
-        return false;
+        return getNumber() >= getMaximum();
     }
 
     @Override

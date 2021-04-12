@@ -36,9 +36,6 @@ public class Zoo implements IZoo{
     //ArrayList<Integer> unReachableAreaIDs;
 
 
-
-
-
     public Zoo() {
         //areaIDs = new ArrayList<>();
         areas = new ArrayList<>();
@@ -59,15 +56,12 @@ public class Zoo implements IZoo{
        // visit = new boolean[n+1]; // 방문여부
         // int code = 0;
         //areaIndex = 0;
-
-
     }
 
     @Override
     public int addArea(IArea area) {
 
         if(area instanceof Entrance) {
-
             Area areaObject = (Area) area;
             areaObject.setId(entranceID);
             areas.add((Area) area);
@@ -95,7 +89,7 @@ public class Zoo implements IZoo{
     @Override
     public void removeArea(int areaId) {
         Area area = (Area) getArea(areaId);
-        assert(area != null);
+        assert (area != null);
 
         //Remove it from areas
         areas.remove(area);
