@@ -22,7 +22,6 @@ public class Gazelle extends Animal {
     }
 
 
-
     @Override
     public boolean canLiveIn(IArea area) {
         if(area instanceof Enclosure) {

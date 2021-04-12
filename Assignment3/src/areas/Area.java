@@ -20,12 +20,11 @@ public abstract class Area implements IArea {
 
 
 
-    public Area(int name) {
-        this.name = name;
+    public Area(int maximum) {
         listOfInhabitants = new ArrayList<>();
         nextAreas = new ArrayList<>();
         prevAreas = new ArrayList<>();
-
+        this.maximum = maximum;
     }
 
     public Area() {
@@ -51,7 +50,7 @@ public abstract class Area implements IArea {
     }
     public boolean isHabitat() { return habitat; }
 
-    public void setMaximum(int maximum) { this.maximum = maximum; }
+    //public void setMaximum(int maximum) { this.maximum = maximum; }
     public int getMaximum() { return maximum; }
 
 
@@ -88,8 +87,18 @@ public abstract class Area implements IArea {
 
     //public abstract void relationship(Area area);
 
+    /**
+     * The maximum number of Cage is 3.
+     * @return true for when the number of animal objects in Cage is greater than or equal to 3.
+     * False for when Cage is less than 3.
+     */
 
-    public abstract boolean isFull();
+    int getNumber() {
+        return listOfInhabitants.size();
+    }
+    public boolean isFull() {
+        return getNumber() >= getMaximum();
+    }
 
 
 

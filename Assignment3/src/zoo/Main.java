@@ -33,7 +33,6 @@ public class Main {
         Zoo z = new Zoo();
         // Test for an entrance with ID zero.
         Cage c = new Cage(1);
-        c.setMaximum(3);
         int c1 = z.addArea(c);
         //System.out.println(c1);
 
@@ -54,7 +53,6 @@ public class Main {
 
         Aquarium a = new Aquarium(2);
         int a1 = z.addArea(a);
-        a.setMaximum(4);
         //System.out.println(a1);
 
         Shark s1 = new Shark("SK");

@@ -174,6 +174,8 @@ public class Zoo implements IZoo{
         //Splice them
         fromArea.nextAreas.add(toArea);
         toArea.prevAreas.add(fromArea);
+
+
     }
 
     @Override
@@ -187,7 +189,6 @@ public class Zoo implements IZoo{
         }
         return true;
     }
-
 
 
     @Override

@@ -20,7 +20,7 @@ public class Buzzard extends Animal{
 
     @Override
     public boolean isCompatibleWith(Animal animal) {
-        return animal instanceof Buzzard || animal instanceof Parrot;
+        return (animal instanceof Buzzard);
     }
 
 

@@ -17,11 +17,7 @@ public class Lion extends Animal {
     }
 
     @Override
-    public boolean isCompatibleWith(Animal animal) {
-        return animal instanceof Lion;
-    }
-
-
+    public boolean isCompatibleWith(Animal animal) { return animal instanceof Lion; }
 
     @Override
     public boolean canLiveIn(IArea area) {

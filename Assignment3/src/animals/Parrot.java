@@ -18,7 +18,7 @@ public class Parrot extends Animal{
     }
 
     public boolean isCompatibleWith(Animal animal) {
-        return animal instanceof Parrot || animal instanceof Buzzard;
+        return animal instanceof Parrot;
     }
 
 

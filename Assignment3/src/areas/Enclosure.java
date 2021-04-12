@@ -8,22 +8,22 @@ public class Enclosure extends Area implements IArea {
 
     int id;
     String name;
-    int number; // This number refer to the current number of objects in Enclosure.
     ArrayList<IArea> adjacent;
-    //int maximum;
 
-    public Enclosure(int name) {
-        super(name);
-        number = 0;
+
+    public Enclosure(int maximum) {
+        super(maximum);
+        //number = 0;
         habitat = true;
         listOfInhabitants = new ArrayList<>();
         adjacent = new ArrayList<>();
+        this.maximum = maximum;
     }
 
     @Override
     public void addAnimalToArea(Animal animal) {
         listOfInhabitants.add(animal);
-        ++number;
+        //++number;
     }
 
     @Override
@@ -33,10 +33,7 @@ public class Enclosure extends Area implements IArea {
         }
         return null;
     }
-
-    public int getNumber() {
-        return number;
-    }
+    //public int getNumber() { return number; }
 
 
 
@@ -53,15 +50,7 @@ public class Enclosure extends Area implements IArea {
 
 
  */
-    /**
-     * The maximum number of Enclosure is 3.
-     * @return true for when the number of animal objects in Enclosure is greater than or equal to 3.
-     * False for when Enclosure is less than 3.
-     */
-    @Override
-    public boolean isFull() {
-        return getNumber() >= getMaximum();
-    }
+
 
     @Override
     public boolean IsCompatibleWithInhabitants(Animal animal) {
