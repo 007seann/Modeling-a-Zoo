@@ -32,9 +32,9 @@ public class Main {
         // Test for an Aquarium.
         Zoo z = new Zoo();
         // Test for an entrance with ID zero.
-        Cage c = new Cage(1);
+        Cage c = new Cage(3);
         int c1 = z.addArea(c);
-        //System.out.println(c1);
+        System.out.println(c1);
 
         Parrot p1 = new Parrot("P1");
         Parrot p2 = new Parrot("P2");
@@ -49,11 +49,11 @@ public class Main {
 
         Entrance e = new Entrance();
         int e1 = z.addArea(e);
-        //System.out.println(e1);
+        System.out.println(e1);
 
         Aquarium a = new Aquarium(2);
         int a1 = z.addArea(a);
-        //System.out.println(a1);
+        System.out.println(a1);
 
         Shark s1 = new Shark("SK");
         Shark s2 = new Shark("SQ");
@@ -65,6 +65,12 @@ public class Main {
         System.out.println(z.addAnimal(a1, s2));
         System.out.println(z.addAnimal(a1, s3));
         //z.addAnimal(a1, star1);
+
+        ArrayList<Integer> temp = new ArrayList<>();
+        temp.add(1);
+        temp.add(2);
+        temp.add(0);
+        System.out.println(z.visit(temp));
 
 
         /*

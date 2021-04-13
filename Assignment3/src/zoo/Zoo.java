@@ -28,20 +28,12 @@ public class Zoo implements IZoo{
 
 
 
-    //int areaIndex;
-    //boolean pathPermission;
-    //static int[][] map;
-    //static boolean[] visit;
-    //static int n;
-    //ArrayList<Integer> unReachableAreaIDs;
-
-
     public Zoo() {
         //areaIDs = new ArrayList<>();
         areas = new ArrayList<>();
         animals = new ArrayList<>();
         allNameLists = new ArrayList<>();
-        areaIDs = new ArrayList<>();
+        //areaIDs = new ArrayList<>();
         lastID = 0;
         //entranceFee = pound + "." + pence;
         entrancePounds = 0;
@@ -51,11 +43,6 @@ public class Zoo implements IZoo{
         //unvisited = new ArrayList<Integer>();
         entranceFee = 0;
 
-       //n = 0; ;// the number of nodes.
-       // map = new int[n+1][n+1]; // 인접 행렬 (인덱스 활용하기 위해 +1)
-       // visit = new boolean[n+1]; // 방문여부
-        // int code = 0;
-        //areaIndex = 0;
     }
 
     @Override
@@ -65,7 +52,6 @@ public class Zoo implements IZoo{
             Area areaObject = (Area) area;
             areaObject.setId(entranceID);
             areas.add((Area) area);
-            areaIDs.add(entranceID);
             return entranceID;
         }
             // Create a new id by increasing the global/static id
@@ -79,7 +65,6 @@ public class Zoo implements IZoo{
 
             //append the area to the current container
             areas.add((Area) area);
-            areaIDs.add(lastID);
 
 
         //return the current Id for the area
@@ -89,12 +74,13 @@ public class Zoo implements IZoo{
     @Override
     public void removeArea(int areaId) {
         Area area = (Area) getArea(areaId);
-        assert (area != null);
+        if (area == null) { return; }
 
         //Remove it from areas
         areas.remove(area);
 
         //Remove it from its prev's next
+        if(area.prevAreas == null) { return; }
         for(Area prev : area.prevAreas) {
             prev.nextAreas.remove(area);
         }
@@ -115,6 +101,7 @@ public class Zoo implements IZoo{
     public IArea getArea(int areaId) {
 
         for(Area area : areas) {
+            if(area == null) { return null; }
             if(area.getId() == areaId) {
                 return area;
             }
@@ -165,16 +152,20 @@ public class Zoo implements IZoo{
 
         //Get fromArea
         Area fromArea = (Area) getArea(fromAreaId);
-        assert(fromArea != null);
+        if(fromArea == null || getArea(fromAreaId) == null) { return; }
+        //assert(fromArea != null);
 
         //Get Area
         Area toArea = (Area) getArea(toAreaId);
-        assert(toArea != null);
+        if(toArea == null || getArea(toAreaId) == null) { return; }
+        //assert(toArea != null);
+
 
         //Splice them
+        if(fromArea.nextAreas == null) { return; }
         fromArea.nextAreas.add(toArea);
+        if(toArea.prevAreas == null) { return; }
         toArea.prevAreas.add(fromArea);
-
 
     }
 
@@ -183,7 +174,9 @@ public class Zoo implements IZoo{
 
         for (int i=0; i<areas.size(); i++){
             Area areaInput = (Area) getArea(areaIds.get(i));
+            if(areaInput == null) { return false; }
             if (areas.get(i).nextAreas != areaInput.nextAreas) {
+                if(areas.get(i).nextAreas == null || areaInput.nextAreas == null) { return false; }
                 return false;
             }
         }
@@ -199,6 +192,9 @@ public class Zoo implements IZoo{
 
         for (Integer areaId : areaIdsVisited) {
             Area area = (Area) getArea(areaId);
+            if(area == null || area.getAnimalFromArea() == null) {
+                return null;
+            }
             allNameLists.add(area.getAnimalFromArea());
         }
         return allNameLists;
@@ -222,6 +218,7 @@ public class Zoo implements IZoo{
 
     void visit(Area a, ArrayList<Integer> unvisited) {
         // if a (area) does not exist in unvisited (it's already visited), just return
+        if(unvisited == null || a == null) { return; }
         if(!unvisited.contains(a.getId()))
             return;
 
