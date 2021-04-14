@@ -10,17 +10,4 @@ public class PicnicArea extends Area implements IArea {
         super();
     }
 
-    @Override
-    public boolean isFull() {
-        return false;
-    }
-
 }
-/*
-
-    @Override
-    public String getAnimalFromArea() {
-        return null;
-    }
-
- */

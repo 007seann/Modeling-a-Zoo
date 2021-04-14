@@ -13,17 +13,4 @@ public class Entrance extends Area implements IArea {
         id = 0;
     }
 
-    @Override
-    public boolean isFull() {
-        return false;
-    }
-
-
 }
-/*
-    @Override
-    public String getAnimalFromArea() {
-        return null;
-    }
-
- */

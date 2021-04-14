@@ -14,12 +14,10 @@ public class Zoo implements IZoo{
     static int lastID;
     static final int entranceID = 0;
     ArrayList<Integer> areaIDs;
-    //ArrayList<String> areaNames;
     ArrayList<Area> areas;
     ArrayList<Animal> animals;
     ArrayList<String> allNameLists;
-    //ArrayList<Integer> unvisited;
-    //int entranceFee;
+
     public int entrancePounds;
     public int entrancePence;
     // cashCount means total money Zoo own.

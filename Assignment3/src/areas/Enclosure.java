@@ -11,14 +11,5 @@ public class Enclosure extends Area implements IArea {
     }
 
 }
-/*
-    @Override
-    public String getAnimalFromArea() {
-        for(Animal list : listOfInhabitants) {
-            System.out.println(list.getNickname());
-        }
-        return null;
-    }
 
- */
 
