@@ -47,7 +47,7 @@ public abstract class Area implements IArea {
     public boolean isHabitat() { return listOfInhabitants != null; }
 
     public void addAnimalToArea(Animal animal) {
-        if (isHabitat()) {
+       if (isHabitat() && !isFull()) {
             listOfInhabitants.add(animal);
         }
     }

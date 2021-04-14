@@ -87,21 +87,23 @@ public class Zoo implements IZoo{
     @Override
     public void removeArea(int areaId) {
         Area area = (Area) getArea(areaId);
-        if (area == null) { return; }
-
-        //Remove it from areas
-        areas.remove(area);
 
         //Remove it from its prev's next
-        if(area.prevAreas == null) { return; }
         for(Area prev : area.prevAreas) {
-            prev.nextAreas.remove(area);
+            if(areas.contains(prev)) {
+                prev.nextAreas.remove(area);
+            }
         }
 
         //Remove it from its next's prev
         for(Area next : area.nextAreas) {
-            next.prevAreas.remove(area);
+            if(areas.contains(next)) {
+                next.prevAreas.remove(area);
+            }
         }
+
+        //Remove it from areas
+        areas.remove(area);
 
     }
 
@@ -112,6 +114,7 @@ public class Zoo implements IZoo{
      */
     @Override
     public IArea getArea(int areaId) {
+
 
         for(Area area : areas) {
             if(area == null) { return null; }
@@ -162,26 +165,25 @@ public class Zoo implements IZoo{
 
     @Override
     public void connectAreas(int fromAreaId, int toAreaId) {
-        if(fromAreaId == toAreaId || fromAreaId < 0 || toAreaId < 0 ) {
-            return;
-        }
 
         //Get fromArea
         Area fromArea = (Area) getArea(fromAreaId);
-        if(fromArea == null || getArea(fromAreaId) == null) { return; }
-        //assert(fromArea != null);
 
         //Get Area
         Area toArea = (Area) getArea(toAreaId);
-        if(toArea == null || getArea(toAreaId) == null) { return; }
-        //assert(toArea != null);
 
-
+        if (fromArea == null || toArea == null) {
+            return;
+        }
         //Splice them
-        if(fromArea.nextAreas == null) { return; }
-        fromArea.nextAreas.add(toArea);
-        if(toArea.prevAreas == null) { return; }
-        toArea.prevAreas.add(fromArea);
+        if(!fromArea.nextAreas.contains(toArea)) {
+            fromArea.nextAreas.add(toArea);
+        }
+
+        if(!toArea.prevAreas.contains(fromArea)){
+            toArea.prevAreas.add(fromArea);
+
+        }
 
     }
 
