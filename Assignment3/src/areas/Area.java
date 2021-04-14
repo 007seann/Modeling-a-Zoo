@@ -6,13 +6,11 @@ import java.util.ArrayList;
 
 public abstract class Area implements IArea {
 
-    boolean habitat;
     protected int id;
     //protected String name;
     protected int name;
     //List of next areas
     public ArrayList<Area> nextAreas;
-    public ArrayList<Integer> adjacentAreas;
     //List of prev areas
     public ArrayList<Area> prevAreas;
     public ArrayList<Animal> listOfInhabitants;
@@ -52,14 +50,27 @@ public abstract class Area implements IArea {
         System.out.println();
     }
 
-    public abstract boolean IsCompatibleWithInhabitants(Animal animal);
+    public boolean IsCompatibleWithInhabitants(Animal animal) {
+        if (isHabitat()) {
+            for(Animal inhabit : listOfInhabitants) {
+                if(!animal.isCompatibleWith(inhabit)) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 
-    public boolean isHabitat() { return habitat; }
+    public boolean isHabitat() { return listOfInhabitants != null; }
 
     //public void setMaximum(int maximum) { this.maximum = maximum; }
     public int getMaximum() { return maximum; }
 
-    public abstract void addAnimalToArea(Animal animal);
+    public void addAnimalToArea(Animal animal) {
+        if (isHabitat()) {
+            listOfInhabitants.add(animal);
+        }
+    }
 
     public int getId() {
         return id;
@@ -69,6 +80,31 @@ public abstract class Area implements IArea {
         id = newId;
     }
 
+    public ArrayList<Integer> getAdjacentAreas() {
+        ArrayList<Integer> a = new ArrayList<>();
+        for (Area nextArea : nextAreas) {
+            a.add(nextArea.getId());
+        }
+        return a;
+    }
+
+    int getNumber() {
+        return listOfInhabitants.size();
+    }
+    public boolean isFull() {
+        return getNumber() >= getMaximum();
+    }
+
+
+    public ArrayList<String> getAnimalNames() {
+        ArrayList<String> animalNames = new ArrayList<>();
+        for (Animal animal : listOfInhabitants) {
+            animalNames.add(animal.getNickname());
+        }
+        return animalNames;
+    }
+
+    //public abstract String getAnimalFromArea();
     int getName() {
         return name;
     }
@@ -80,34 +116,6 @@ public abstract class Area implements IArea {
     void addAdjacent(Area area) {
         nextAreas.add(area);
     }
-
-    public ArrayList<Integer> getAdjacentAreas() {
-        for (Area nextArea : nextAreas) {
-            adjacentAreas.add(nextArea.getId());
-        }
-        return adjacentAreas;
-    }
-
-    int getNumber() {
-        return listOfInhabitants.size();
-    }
-    public boolean isFull() {
-        return getNumber() >= getMaximum();
-    }
-
-    public boolean hasAnimal() {
-        return listOfInhabitants != null && listOfInhabitants.size() != 0;
-    }
-
-    public ArrayList<String> getAnimalNames() {
-        ArrayList<String> animalNames = new ArrayList<>();
-        for (Animal animal : listOfInhabitants) {
-            animalNames.add(animal.getNickname());
-        }
-        return animalNames;
-    }
-
-    //public abstract String getAnimalFromArea();
 
 
 

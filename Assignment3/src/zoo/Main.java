@@ -35,6 +35,14 @@ public class Main {
         Entrance e = new Entrance();
         int e1 = z.addArea(e);
         System.out.println(e1);
+        System.out.println();
+
+
+        Entrance ee = new Entrance();
+        int e2 = z.addArea(ee);
+        System.out.println(e2);
+        System.out.println();
+
 
 
         // Test for an entrance with ID zero.

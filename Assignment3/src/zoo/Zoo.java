@@ -25,6 +25,7 @@ public class Zoo implements IZoo{
     // cashCount means total money Zoo own.
     CashCount cashCount;
     double entranceFee;
+    //boolean onlyOneEntrance;
 
 
 
@@ -42,18 +43,23 @@ public class Zoo implements IZoo{
         //entranceFee = 0;
         //unvisited = new ArrayList<Integer>();
         entranceFee = 0;
+        //onlyOneEntrance = true;
+
 
     }
 
     @Override
     public int addArea(IArea area) {
-
         if(area instanceof Entrance) {
             Area areaObject = (Area) area;
             areaObject.setId(entranceID);
             areas.add((Area) area);
+            //onlyOneEntrance = false;
             return entranceID;
         }
+
+       // if(!checkEntranceExistence())
+       //     return entranceID;
             // Create a new id by increasing the global/static id
             ++lastID;
 
@@ -69,6 +75,15 @@ public class Zoo implements IZoo{
 
         //return the current Id for the area
         return lastID;
+    }
+
+    public boolean checkEntranceExistence() {
+        for(Area area : areas) {
+            if(area instanceof Entrance)
+                return false;
+
+        }
+        return true;
     }
 
     @Override
@@ -218,7 +233,7 @@ public class Zoo implements IZoo{
 
         for (Integer areaId : areaIdsVisited) {
             Area area = (Area) getArea(areaId);
-            if (area.hasAnimal()) {
+            if (area.isHabitat()) {
                 animalNames.addAll(area.getAnimalNames());
             }
         }
