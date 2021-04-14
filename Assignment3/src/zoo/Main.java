@@ -31,6 +31,12 @@ public class Main {
 
         // Test for an Aquarium.
         Zoo z = new Zoo();
+
+        Entrance e = new Entrance();
+        int e1 = z.addArea(e);
+        System.out.println(e1);
+
+
         // Test for an entrance with ID zero.
         Cage c = new Cage(3);
         int c1 = z.addArea(c);
@@ -47,10 +53,6 @@ public class Main {
         System.out.println();
 
 
-        Entrance e = new Entrance();
-        int e1 = z.addArea(e);
-        System.out.println(e1);
-
         Aquarium a = new Aquarium(2);
         int a1 = z.addArea(a);
         System.out.println(a1);
@@ -66,11 +68,17 @@ public class Main {
         System.out.println(z.addAnimal(a1, s3));
         //z.addAnimal(a1, star1);
 
+        PicnicArea p = new PicnicArea();
+        int picnic1 = z.addArea(p);
+        z.connectAreas(e1, picnic1);
+        e.print();
+
         ArrayList<Integer> temp = new ArrayList<>();
         temp.add(1);
         temp.add(2);
         temp.add(0);
         System.out.println(z.visit(temp));
+        System.out.println(z.findUnreachableAreas());
 
 
         /*

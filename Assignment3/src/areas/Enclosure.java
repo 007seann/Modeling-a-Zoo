@@ -26,30 +26,12 @@ public class Enclosure extends Area implements IArea {
         //++number;
     }
 
-    @Override
-    public String getAnimalFromArea() {
-        for(Animal list : listOfInhabitants) {
-            System.out.println(list.getNickname());
-        }
-        return null;
-    }
-    //public int getNumber() { return number; }
-
-
-
 
     @Override
     public ArrayList<Integer> getAdjacentAreas() {
         return null;
     }
-/*
-    @Override
-    public void relationship() {
-        adjacent.add(enclosure);
-    }
 
-
- */
 
 
     @Override
@@ -62,3 +44,14 @@ public class Enclosure extends Area implements IArea {
         return true;
     }
 }
+/*
+    @Override
+    public String getAnimalFromArea() {
+        for(Animal list : listOfInhabitants) {
+            System.out.println(list.getNickname());
+        }
+        return null;
+    }
+
+ */
+

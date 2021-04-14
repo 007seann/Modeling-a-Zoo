@@ -22,12 +22,6 @@ public class PicnicArea extends Area implements IArea {
     }
 
     @Override
-    public String getAnimalFromArea() {
-        return null;
-    }
-
-
-    @Override
     public ArrayList<Integer> getAdjacentAreas() {
         return null;
     }
@@ -42,3 +36,11 @@ public class PicnicArea extends Area implements IArea {
         return false;
     }
 }
+/*
+
+    @Override
+    public String getAnimalFromArea() {
+        return null;
+    }
+
+ */

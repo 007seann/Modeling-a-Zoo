@@ -21,14 +21,17 @@ public abstract class Area implements IArea {
 
 
     public Area(int maximum) {
-        listOfInhabitants = new ArrayList<>();
+
         nextAreas = new ArrayList<>();
         prevAreas = new ArrayList<>();
-        this.maximum = maximum;
+        if (maximum != 0) {
+            listOfInhabitants = new ArrayList<>();
+            this.maximum = maximum;
+        }
     }
 
     public Area() {
-
+        this(0);
     }
 
     public void print() {
@@ -48,15 +51,15 @@ public abstract class Area implements IArea {
         }
         System.out.println();
     }
+
+    public abstract boolean IsCompatibleWithInhabitants(Animal animal);
+
     public boolean isHabitat() { return habitat; }
 
     //public void setMaximum(int maximum) { this.maximum = maximum; }
     public int getMaximum() { return maximum; }
 
-
     public abstract void addAnimalToArea(Animal animal);
-
-    public abstract String getAnimalFromArea();
 
     public int getId() {
         return id;
@@ -92,9 +95,22 @@ public abstract class Area implements IArea {
         return getNumber() >= getMaximum();
     }
 
+    public boolean hasAnimal() {
+        return listOfInhabitants != null && listOfInhabitants.size() != 0;
+    }
+
+    public ArrayList<String> getAnimalNames() {
+        ArrayList<String> animalNames = new ArrayList<>();
+        for (Animal animal : listOfInhabitants) {
+            animalNames.add(animal.getNickname());
+        }
+        return animalNames;
+    }
+
+    //public abstract String getAnimalFromArea();
 
 
-    public abstract boolean IsCompatibleWithInhabitants(Animal animal);
+
 
 
 }

@@ -21,31 +21,13 @@ public class Entrance extends Area implements IArea {
 
     @Override
     public void addAnimalToArea(Animal animal) {
-
     }
-
-    @Override
-    public String getAnimalFromArea() {
-        return null;
-    }
-
 
     @Override
     public ArrayList<Integer> getAdjacentAreas() {
         return null;
     }
-/*
-    @Override
-    public void relationship(Area area) {
 
-        while(area instanceof PicnicArea) {
-
-        }
-        adjacent.add(picnicArea);
-    }
-
-
- */
     @Override
     public boolean isFull() {
         return false;
@@ -56,3 +38,10 @@ public class Entrance extends Area implements IArea {
         return false;
     }
 }
+/*
+    @Override
+    public String getAnimalFromArea() {
+        return null;
+    }
+
+ */

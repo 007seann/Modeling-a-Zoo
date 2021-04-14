@@ -29,16 +29,6 @@ public class Cage extends Area implements IArea {
        // ++number;
     }
 
-    @Override
-    public String getAnimalFromArea() {
-        for(Animal list : listOfInhabitants) {
-            System.out.println(list.getNickname());
-        }
-        return null;
-    }
-
-   // public int getNumber() { return number;}
-
 
 
     @Override
@@ -58,4 +48,17 @@ public class Cage extends Area implements IArea {
         }
         return true;
     }
+
 }
+
+ /*
+    @Override
+    public String getAnimalFromArea() {
+        for(Animal list : listOfInhabitants) {
+            System.out.println(list.getNickname());
+        }
+        return null;
+    }
+
+   // public int getNumber() { return number;}
+     */

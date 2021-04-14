@@ -149,6 +149,9 @@ public class Zoo implements IZoo{
 
     @Override
     public void connectAreas(int fromAreaId, int toAreaId) {
+        if(fromAreaId == toAreaId || fromAreaId < 0 || toAreaId < 0 ) {
+            return;
+        }
 
         //Get fromArea
         Area fromArea = (Area) getArea(fromAreaId);
@@ -171,34 +174,57 @@ public class Zoo implements IZoo{
 
     @Override
     public boolean isPathAllowed(ArrayList<Integer> areaIds) {
+        // Treat empty paths as passing case.
+        if (areaIds == null || areaIds.size() == 0)
+            return true;
 
-        for (int i=0; i<areas.size(); i++){
-            Area areaInput = (Area) getArea(areaIds.get(i));
-            if(areaInput == null) { return false; }
-            if (areas.get(i).nextAreas != areaInput.nextAreas) {
-                if(areas.get(i).nextAreas == null || areaInput.nextAreas == null) { return false; }
+        // Initialize prev area.
+        int prevId = areaIds.get(0);
+        if (!hasArea(prevId))
+            return false;
+        Area prev = (Area) getArea(prevId);
+
+        // visited ArrayList
+        ArrayList<Area> visited = new ArrayList<>();
+        visited.add(prev);
+
+        for (int i = 1; i < areas.size(); i++) {
+            // Get curr area.
+            int currId = areaIds.get(i);
+            if (!hasArea(currId))
                 return false;
-            }
+            Area curr = (Area) getArea(currId);
+
+            // Check if curr is in the prev's next.
+            if (!prev.nextAreas.contains(curr))
+                return false;
+            // Update prev
+            prev = curr;
         }
         return true;
     }
 
+    boolean hasArea(int areaId) {
+        return getArea(areaId) != null;
+    }
 
     @Override
     public ArrayList<String> visit(ArrayList<Integer> areaIdsVisited) {
-        if (!isPathAllowed(areaIdsVisited)) {
+        ArrayList<String> animalNames = new ArrayList<>();
+
+        if(!isPathAllowed(areaIdsVisited)) {
             return null;
         }
 
         for (Integer areaId : areaIdsVisited) {
             Area area = (Area) getArea(areaId);
-            if(area == null || area.getAnimalFromArea() == null) {
-                return null;
+            if (area.hasAnimal()) {
+                animalNames.addAll(area.getAnimalNames());
             }
-            allNameLists.add(area.getAnimalFromArea());
         }
-        return allNameLists;
+        return animalNames;
     }
+
 
     @Override
     public ArrayList<Integer> findUnreachableAreas() {
@@ -213,7 +239,6 @@ public class Zoo implements IZoo{
         visit(e,unvisited);
 
         return unvisited;
-
     }
 
     void visit(Area a, ArrayList<Integer> unvisited) {
@@ -288,6 +313,45 @@ public class Zoo implements IZoo{
         return cashCount.pay(returnValue);
 
     }
+
+}
+
+/*
+    @Override
+    public boolean isPathAllowed(ArrayList<Integer> areaIds) {
+
+        if(areaIds == null) {
+            return false;
+        }
+
+        for (int i=0; i<areas.size(); i++){
+            Area areaInput = (Area) getArea(areaIds.get(i));
+            if(areaInput == null) { return false; }
+            if (areas.get(i).nextAreas != areaInput.nextAreas) {
+                if(areas.get(i).nextAreas == null || areaInput.nextAreas == null) { return false; }
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public ArrayList<String> visit(ArrayList<Integer> areaIdsVisited) {
+        if (!isPathAllowed(areaIdsVisited)) {
+            return null;
+        }
+
+        for (Integer areaId : areaIdsVisited) {
+            Area area = (Area) getArea(areaId);
+            if(area == null || area.getAnimalFromArea() == null) {
+                return null;
+            }
+            allNameLists.add(area.getAnimalFromArea());
+        }
+        return allNameLists;
+    }
+ */
+
 /*
     CashCount payEntranceFee(CashCount cashInserted) {
         //totalMoney += cashInserted;
@@ -302,6 +366,3 @@ public class Zoo implements IZoo{
 
 
  */
-
-}
-
