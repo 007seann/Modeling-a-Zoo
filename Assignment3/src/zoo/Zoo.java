@@ -37,6 +37,7 @@ public class Zoo implements IZoo{
         entrancePence = 0;
         cashCount = new CashCount();
         entranceFee = 0;
+        addArea(new Entrance());
 
 
     }
@@ -74,8 +75,9 @@ public class Zoo implements IZoo{
 
     @Override
     public void removeArea(int areaId) {
+        
         Area area = (Area) getArea(areaId);
-        if (area == null) { return; }
+        if (area == null || area instanceof Entrance) { return; }
 
         // Remove it from any nextAreas, if present.
         for (Area prev : areas) {
