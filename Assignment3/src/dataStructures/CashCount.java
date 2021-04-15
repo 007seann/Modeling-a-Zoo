@@ -13,10 +13,6 @@ public class CashCount implements ICashCount{
     int countOf20p;
     int countOf10p;
 
-    int Count10000;
-    int Count5000;
-    int Count1000;
-
     public CashCount() {
         countOf20poundsNote = 0;
         countOf10poundsNote = 0;
@@ -42,148 +38,146 @@ public class CashCount implements ICashCount{
         return c;
     }
 
-    double getValue() {
-        return    20 * countOf20poundsNote
-                + 10 * countOf10poundsNote
-                + 5 * countOf5poundsNote
-                + 2 * countOf2poundsNote
-                + 1 * countOf1poundsNote
-                + 0.5 * countOf50p
-                + 0.2 * countOf20p
-                + 0.1 * countOf10p;
+    // return value in pence
+    public int getValue() {
+        return    2000 * countOf20poundsNote
+                + 1000 * countOf10poundsNote
+                + 500 * countOf5poundsNote
+                + 200 * countOf2poundsNote
+                + 100 * countOf1poundsNote
+                + 50 * countOf50p
+                + 20 * countOf20p
+                + 10 * countOf10p;
     }
 
-    public static double subtract(CashCount left, double entranceFee) {
+    public static int subtract(CashCount left, int entranceFee) {
         return left.getValue() - entranceFee;
     }
 
-    public CashCount pay(double value) {
+    // value in pence
+    public CashCount pay(int value) {
         CashCount c = new CashCount();
 
+        if(value >= 2000) {
+            int n = value / 2000;
+            value = value % 2000;
+            if(countOf20poundsNote >= n) {
+                countOf20poundsNote -= n;
+                c.countOf20poundsNote = n;
+            } else {
+                // Pay up to the current number of money
+                c.countOf20poundsNote = countOf20poundsNote;
+                value += (n - countOf20poundsNote) * 2000;
+                countOf20poundsNote = 0;
+            }
+        }
+
+        if(value >= 1000) {
+            int n = value / 1000;
+            value = value % 1000;
+            if(countOf10poundsNote >= n) {
+                countOf10poundsNote -= n;
+                c.countOf10poundsNote = n;
+            } else {
+                c.countOf10poundsNote = countOf10poundsNote;
+                value += (n - countOf10poundsNote) * 1000;
+                countOf10poundsNote = 0;
+            }
+        }
+
+        if(value >= 500) {
+            int n = value / 500;
+            value = value % 500;
+            if(countOf5poundsNote >= n) {
+                countOf5poundsNote -= n;
+                c.countOf5poundsNote = n;
+            } else  {
+                c.countOf5poundsNote = countOf5poundsNote;
+                value += (n - countOf5poundsNote) * 1000;
+                countOf5poundsNote = 0;
+            }
+        }
+
+        if(value >= 200) {
+            int n =  value / 200;
+            value = value % 200;
+            if(countOf2poundsNote >= n) {
+                countOf2poundsNote -= n;
+                c.countOf2poundsNote = n;
+            } else {
+                c.countOf2poundsNote = countOf2poundsNote;
+                value += (n - countOf2poundsNote) * 200;
+                countOf2poundsNote = 0;
+            }
+        }
+
+        if(value >= 100) {
+            int n =  value / 100;
+            value = value % 100;
+            if(countOf1poundsNote >= n) {
+                countOf1poundsNote -= n;
+                c.countOf1poundsNote = n;
+            } else {
+                c.countOf1poundsNote = countOf1poundsNote;
+                value += (n - countOf1poundsNote) * 100;
+                countOf1poundsNote = 0;
+            }
+        }
+
+        if(value >= 50) {
+            int n = value / 50;
+            value = value % 50;
+            if(countOf50p >= n) {
+                countOf50p -= n;
+                c.countOf50p = n;
+            } else {
+                c.countOf50p = countOf50p;
+                value += (n - countOf50p) * 50;
+                countOf50p = 0;
+            }
+        }
+
         if(value >= 20) {
-            int n = (int) value / 20;
-            countOf20poundsNote -= n;
-            c.countOf20poundsNote = n;
+            int n = value / 20;
             value = value % 20;
+            if(countOf20p >= n) {
+                countOf20p -= n;
+                c.countOf20p = n;
+            } else {
+                c.countOf20p = countOf20p;
+                value += (n - countOf20p) * 20;
+                countOf20p = 0;
+            }
         }
 
         if(value >= 10) {
-            int n = (int) value / 10;
-            countOf10poundsNote -= n;
-            c.countOf10poundsNote = n;
+            int n = value / 10;
             value = value % 10;
+            if(countOf10p >= n) {
+                countOf10p -= n;
+                c.countOf10p = n;
+            } else  {
+                c.countOf10p = countOf10p;
+                value += (n - countOf10p) * 10;
+                countOf10p = 0;
+            }
         }
-
-        if(value >= 5) {
-            int n = (int) value / 5;
-            countOf5poundsNote -= n;
-            c.countOf5poundsNote = n;
-            value = value % 5;
-        }
-
-        if(value >= 2) {
-            int n = (int) value / 2;
-            countOf2poundsNote -= n;
-            c.countOf2poundsNote = n;
-            value = value % 2;
-        }
-
-        if(value >= 1) {
-            int n = (int) value / 1;
-            countOf1poundsNote -= n;
-            c.countOf1poundsNote = n;
-            value = value % 1;
-        }
-
-        if(value >= 0.5) {
-            int n = (int) ((int) value / 0.5);
-            countOf50p -= n;
-            c.countOf50p = n;
-            value = value % 0.5;
-        }
-
-        if(value >= 0.5) {
-            int n = (int) ((int) value / 0.5);
-            countOf50p -= n;
-            c.countOf50p = n;
-            value = value % 0.5;
-        }
-
-        if(value >= 0.2) {
-            int n = (int) ((int) value / 0.2);
-            countOf20p -= n;
-            c.countOf20p = n;
-            value = value % 0.2;
-        }
-
-        if(value >= 0.1) {
-            int n = (int) ((int) value / 0.1);
-            countOf10p -= n;
-            c.countOf10p = n;
-            value = value % 0.1;
-        }
-
         return c;
-
     }
 
-        /*
-        if (value >= 10000) {
-            int n = (int) value / 10000;
-            Count10000 -= n; // n개의 10000 지폐를 내 객체에서 빼놓기
-            c.Count10000 = n; // 10000짜리 세팅
-            value = value % 10000; // 나머지 돈을 value로 세팅
-        }
-
-        if (value >= 5000) {
-            int n = (int) value / 5000;
-            Count5000 -= n ;
-            c.Count5000 = n ;
-            value = value % 5000;
-        }
-
-        if (value >= 1000) {
-            int n = (int) value / 1000;
-            Count1000 -= n ;
-            c.Count1000 = n ;
-            value = value % 1000;
-        }
-
-        /// ...compose the right set of coin count in this object
-
-        return c;
-
-         */
-
-
-
-/*
-    public static CashCount returnChange(CashCount cashInserted) {
-        Zoo z = new Zoo();
+    public static CashCount sub(CashCount cashCount, CashCount cashInserted) {
         CashCount c = new CashCount();
-        c.countOf20poundsNote = cashInserted.countOf20poundsNote - z.getEntrancePounds().cashInserted;
-        c.countOf10poundsNote = cash
-        ...
+        c.countOf20poundsNote = cashCount.countOf20poundsNote - cashInserted.countOf20poundsNote;
+        c.countOf10poundsNote = cashCount.countOf10poundsNote - cashInserted.countOf10poundsNote;
+        c.countOf5poundsNote = cashCount.countOf5poundsNote - cashInserted.countOf5poundsNote;
+        c.countOf2poundsNote = cashCount.countOf2poundsNote - cashInserted.countOf2poundsNote;
+        c.countOf1poundsNote = cashCount.countOf1poundsNote - cashInserted.countOf1poundsNote;
+        c.countOf50p = cashCount.countOf50p - cashInserted.countOf50p;
+        c.countOf20p = cashCount.countOf20p - cashInserted.countOf20p;
+        c.countOf10p = cashCount.countOf10p - cashInserted.countOf10p;
+
+        return c;
     }
-
- */
-/*
-    int getValue() {
-
-    }
-
-
- */
-    /*
-    public void add(CashCount right) {
-        this.coin1 = this.coin1 + right.coin1;
-        this.coin2 = this.coin2 + right.coin2;
-        ...
-        }
-
-        // totalMoney += cashInserter;
-        -> totalMoney.add(cashInserter);
-     */
 
     @Override
     public void setNrNotes_20pounds(int noteCount) {
@@ -263,3 +257,63 @@ public class CashCount implements ICashCount{
         return countOf10p;
     }
 }
+
+
+
+        /*
+        if (value >= 10000) {
+            int n = (int) value / 10000;
+            Count10000 -= n; // n개의 10000 지폐를 내 객체에서 빼놓기
+            c.Count10000 = n; // 10000짜리 세팅
+            value = value % 10000; // 나머지 돈을 value로 세팅
+        }
+
+        if (value >= 5000) {
+            int n = (int) value / 5000;
+            Count5000 -= n ;
+            c.Count5000 = n ;
+            value = value % 5000;
+        }
+
+        if (value >= 1000) {
+            int n = (int) value / 1000;
+            Count1000 -= n ;
+            c.Count1000 = n ;
+            value = value % 1000;
+        }
+
+        /// ...compose the right set of coin count in this object
+
+        return c;
+
+         */
+
+
+
+/*
+    public static CashCount returnChange(CashCount cashInserted) {
+        Zoo z = new Zoo();
+        CashCount c = new CashCount();
+        c.countOf20poundsNote = cashInserted.countOf20poundsNote - z.getEntrancePounds().cashInserted;
+        c.countOf10poundsNote = cash
+        ...
+    }
+
+ */
+/*
+    int getValue() {
+
+    }
+
+
+ */
+    /*
+    public void add(CashCount right) {
+        this.coin1 = this.coin1 + right.coin1;
+        this.coin2 = this.coin2 + right.coin2;
+        ...
+        }
+
+        // totalMoney += cashInserter;
+        -> totalMoney.add(cashInserter);
+     */

@@ -18,11 +18,8 @@ public class Zoo implements IZoo{
     ArrayList<Animal> animals;
     ArrayList<String> allNameLists;
 
-    public int entrancePounds;
-    public int entrancePence;
-    // cashCount means total money Zoo own.
-    CashCount cashCount;
-    double entranceFee;
+    CashCount cashCount; // total money Zoo has
+    int entranceFee; // Entrance fee in pence
 
 
 
@@ -33,8 +30,6 @@ public class Zoo implements IZoo{
         animals = new ArrayList<>();
         allNameLists = new ArrayList<>();
         lastID = 0;
-        entrancePounds = 0;
-        entrancePence = 0;
         cashCount = new CashCount();
         entranceFee = 0;
         addArea(new Entrance());
@@ -75,7 +70,7 @@ public class Zoo implements IZoo{
 
     @Override
     public void removeArea(int areaId) {
-        
+
         Area area = (Area) getArea(areaId);
         if (area == null || area instanceof Entrance) { return; }
 
@@ -326,17 +321,8 @@ public class Zoo implements IZoo{
 
     @Override
     public void setEntranceFee(int pounds, int pence) {
-        entrancePounds = pounds;
-        entrancePence = pence;
+        entranceFee = pounds * 100 + pence;
     }
-
-    public int getEntrancePounds() {
-        return entrancePounds;
-    }
-    public int getEntrancePence() {
-        return entrancePence;
-    }
-
 
     @Override
     public void setCashSupply(ICashCount coins) {
@@ -353,16 +339,37 @@ public class Zoo implements IZoo{
         CashCount moneyInserted = (CashCount) cashInserted;
 
         // Corner cases
+        // Case 1 when cashInserted is smaller than entranceFee
+        if(moneyInserted.getValue() < entranceFee) {
+            return moneyInserted;
+        }
 
-
-        // totalMoney += cashInserted;
+        // cashCount += cashInserted;
         cashCount = CashCount.add(cashCount, moneyInserted);
 
-        // return cashInserted - entranceFee;
-        double returnValue = CashCount.subtract(moneyInserted, entranceFee);
+        // changeValue(pence) = cashInserted(CashCount) - entranceFee(pence)
+        int changeValue = CashCount.subtract(moneyInserted, entranceFee);
 
-        // Update totalMoney by subtracting returnValue;
-        return cashCount.pay(returnValue);
+        // Update cashCount by subtracting changeValue from it.
+        // Return change converted in CashCount for the given changeValue.
+        CashCount change = cashCount.pay(changeValue);
+
+        // Case 2 When we can't pay the change -- the converted CashCount is different than changeValue.
+        if (change.getValue() != changeValue) {
+            // restore the original money to cashCount that Zoo has.
+            cashCount = CashCount.add(cashCount, change);
+            cashCount = CashCount.sub(cashCount, moneyInserted);
+
+            // return the inserted money
+            return moneyInserted;
+        }
+
+        // Now all meet. Just return the change.
+        return change;
+
+        // Case 3
+        // Case 4
+        // else부분이 20파운드 11장을 내야하는데 10장있을경우 1장을 다음 화폐 단위로 넘겨주는 코드
 
     }
 
