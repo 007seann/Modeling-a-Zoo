@@ -23,7 +23,7 @@ public class Zoo implements IZoo{
     // cashCount means total money Zoo own.
     CashCount cashCount;
     double entranceFee;
-    //boolean onlyOneEntrance;
+
 
 
 
@@ -32,32 +32,28 @@ public class Zoo implements IZoo{
         areas = new ArrayList<>();
         animals = new ArrayList<>();
         allNameLists = new ArrayList<>();
-        //areaIDs = new ArrayList<>();
         lastID = 0;
-        //entranceFee = pound + "." + pence;
         entrancePounds = 0;
         entrancePence = 0;
         cashCount = new CashCount();
-        //entranceFee = 0;
-        //unvisited = new ArrayList<Integer>();
         entranceFee = 0;
-        //onlyOneEntrance = true;
 
 
     }
 
     @Override
     public int addArea(IArea area) {
-        if(area instanceof Entrance) {
-            Area areaObject = (Area) area;
-            areaObject.setId(entranceID);
-            areas.add((Area) area);
-            //onlyOneEntrance = false;
-            return entranceID;
-        }
 
-       // if(!checkEntranceExistence())
-       //     return entranceID;
+
+            if (area instanceof Entrance) {
+                Area areaObject = (Area) area;
+                areaObject.setId(entranceID);
+                if(getArea(0) != null)
+                    removeArea(0);
+                areas.add((Area) area);
+                return entranceID;
+            }
+
             // Create a new id by increasing the global/static id
             ++lastID;
 
@@ -70,24 +66,27 @@ public class Zoo implements IZoo{
             //append the area to the current container
             areas.add((Area) area);
 
-
         //return the current Id for the area
         return lastID;
+
     }
 
-    public boolean checkEntranceExistence() {
-        for(Area area : areas) {
-            if(area instanceof Entrance)
-                return false;
-
-        }
-        return true;
-    }
 
     @Override
     public void removeArea(int areaId) {
         Area area = (Area) getArea(areaId);
+        if (area == null) { return; }
 
+        // Remove it from any nextAreas, if present.
+        for (Area prev : areas) {
+            prev.nextAreas.remove(area);
+        }
+
+        //Remove it from areas
+        areas.remove(area);
+
+    }
+/*
         //Remove it from its prev's next
         for(Area prev : area.prevAreas) {
             if(areas.contains(prev)) {
@@ -102,10 +101,7 @@ public class Zoo implements IZoo{
             }
         }
 
-        //Remove it from areas
-        areas.remove(area);
-
-    }
+         */
 
     /**
      * Returns the area associated with the given ID.
@@ -165,27 +161,66 @@ public class Zoo implements IZoo{
 
     @Override
     public void connectAreas(int fromAreaId, int toAreaId) {
-
         //Get fromArea
         Area fromArea = (Area) getArea(fromAreaId);
 
         //Get Area
         Area toArea = (Area) getArea(toAreaId);
 
+        if (fromArea == null || toArea == null)
+            return;
+
+        for(Integer areaId : fromArea.getAdjacentAreas()) {
+            if(toAreaId == areaId) {
+                return;
+            }
+        }
+
+        //Splice them
+        if (!fromArea.nextAreas.contains(toArea))
+            fromArea.nextAreas.add(toArea);
+    }
+
+
+
+/*
+    {
+       //Get fromArea
+        Area fromArea = (Area) getArea(fromAreaId);
+        //Get Area
+        Area toArea = (Area) getArea(toAreaId);
+        for(Integer areaId : fromArea.getAdjacentAreas()) {
+            if(toAreaId == areaId) {
+                fromArea.nextAreas.add(toArea);
+            }
+        }
+
+ */
+
+        /*
         if (fromArea == null || toArea == null) {
             return;
         }
+
+         */
+        /*
         //Splice them
         if(!fromArea.nextAreas.contains(toArea)) {
             fromArea.nextAreas.add(toArea);
         }
 
+
+         */
+
+        /*
         if(!toArea.prevAreas.contains(fromArea)){
             toArea.prevAreas.add(fromArea);
 
         }
 
-    }
+         */
+
+
 
     @Override
     public boolean isPathAllowed(ArrayList<Integer> areaIds) {

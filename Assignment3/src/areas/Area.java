@@ -11,7 +11,7 @@ public abstract class Area implements IArea {
     //List of next areas
     public ArrayList<Area> nextAreas;
     //List of prev areas
-    public ArrayList<Area> prevAreas;
+    //public ArrayList<Area> prevAreas;
     public ArrayList<Animal> listOfInhabitants;
     int maximum;
 
@@ -20,7 +20,7 @@ public abstract class Area implements IArea {
     public Area(int maximum) {
 
         nextAreas = new ArrayList<>();
-        prevAreas = new ArrayList<>();
+        //prevAreas = new ArrayList<>();
         if (maximum != 0) {
             listOfInhabitants = new ArrayList<>();
             this.maximum = maximum;
@@ -33,9 +33,9 @@ public abstract class Area implements IArea {
 
 
     public boolean IsCompatibleWithInhabitants(Animal animal) {
-        if (isHabitat()) {
-            return false;
-        }
+        //if (isHabitat()) {
+        //    return false;
+        //}
         for(Animal inhabit : listOfInhabitants) {
            if(!animal.isCompatibleWith(inhabit)) {
                   return false;
@@ -63,6 +63,7 @@ public abstract class Area implements IArea {
     public ArrayList<Integer> getAdjacentAreas() {
         ArrayList<Integer> a = new ArrayList<>();
         for (Area nextArea : nextAreas) {
+            //if(nextArea != null)
             a.add(nextArea.getId());
         }
         return a;
@@ -92,6 +93,9 @@ public abstract class Area implements IArea {
         System.out.println();
     }
 
+}
+
+/*
     public void printPrev() {
         System.out.println("Area Id: " + id);
         System.out.print("\t prev: ");
@@ -100,4 +104,5 @@ public abstract class Area implements IArea {
         }
         System.out.println();
     }
-}
+
+ */
