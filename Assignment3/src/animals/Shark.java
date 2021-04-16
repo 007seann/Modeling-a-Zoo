@@ -6,10 +6,7 @@ public class Shark extends Animal{
 
     private final String nickName;
 
-    public Shark(String nickName) {
-        this.nickName = nickName;
-
-    }
+    public Shark(String nickName) { this.nickName = nickName; }
 
     @Override
     public String getNickname() {

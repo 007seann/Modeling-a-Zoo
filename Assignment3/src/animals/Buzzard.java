@@ -8,10 +8,7 @@ public class Buzzard extends Animal{
     private final String nickName;
 
 
-    public Buzzard(String nickName) {
-        this.nickName = nickName;
-
-    }
+    public Buzzard(String nickName) { this.nickName = nickName; }
 
     @Override
     public String getNickname() {

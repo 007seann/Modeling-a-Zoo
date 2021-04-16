@@ -6,10 +6,7 @@ public class Starfish extends Animal{
 
     private final String nickName;
 
-    public Starfish(String nickName) {
-        this.nickName = nickName;
-
-    }
+    public Starfish(String nickName) { this.nickName = nickName; }
 
     @Override
     public String getNickname() {

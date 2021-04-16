@@ -31,11 +31,15 @@ public class Main {
 
         // Test for an Aquarium.
         Zoo z = new Zoo();
-
-        Entrance e = new Entrance();
-        int e1 = z.addArea(e);
-        System.out.println(e1);
-        System.out.println();
+        CashCount c = new CashCount();
+        CashCount insertedMoney = new CashCount();
+        c.setNrCoins_2pounds(1);
+        insertedMoney.setNrNotes_20pounds(1);
+        z.setEntranceFee(17, 80);
+        z.setCashSupply(c);
+        System.out.println(c.getValue());
+        System.out.println(z.payEntranceFee(insertedMoney).getNrNotes_20pounds());
+        System.out.println(z.getCashSupply().getNrCoins_2pounds());
 
 
         /*
@@ -89,6 +93,7 @@ public class Main {
         e.print();
 
          */
+        /*
         ArrayList<Integer> temp = new ArrayList<>();
         temp.add(0);
         //temp.add(0);
@@ -98,6 +103,8 @@ public class Main {
         System.out.println(z.findUnreachableAreas());
         //z.visit(0)
 
+
+         */
 
         /*
         System.out.println(z.cashCount);

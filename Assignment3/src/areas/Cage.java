@@ -10,7 +10,6 @@ public class Cage extends Area implements IArea {
         super(maximum);
     }
 
-
 }
 
 

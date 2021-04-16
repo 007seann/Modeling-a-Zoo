@@ -38,6 +38,25 @@ public class CashCount implements ICashCount{
         return c;
     }
 
+
+    public static CashCount sub(CashCount cashCount, CashCount cashInserted) {
+        CashCount c = new CashCount();
+        c.countOf20poundsNote = cashCount.countOf20poundsNote - cashInserted.countOf20poundsNote;
+        c.countOf10poundsNote = cashCount.countOf10poundsNote - cashInserted.countOf10poundsNote;
+        c.countOf5poundsNote = cashCount.countOf5poundsNote - cashInserted.countOf5poundsNote;
+        c.countOf2poundsNote = cashCount.countOf2poundsNote - cashInserted.countOf2poundsNote;
+        c.countOf1poundsNote = cashCount.countOf1poundsNote - cashInserted.countOf1poundsNote;
+        c.countOf50p = cashCount.countOf50p - cashInserted.countOf50p;
+        c.countOf20p = cashCount.countOf20p - cashInserted.countOf20p;
+        c.countOf10p = cashCount.countOf10p - cashInserted.countOf10p;
+
+        return c;
+    }
+
+    public static int subtract(CashCount left, int entranceFee) {
+        return left.getValue() - entranceFee;
+    }
+
     // return value in pence
     public int getValue() {
         return    2000 * countOf20poundsNote
@@ -48,10 +67,6 @@ public class CashCount implements ICashCount{
                 + 50 * countOf50p
                 + 20 * countOf20p
                 + 10 * countOf10p;
-    }
-
-    public static int subtract(CashCount left, int entranceFee) {
-        return left.getValue() - entranceFee;
     }
 
     // value in pence
@@ -165,19 +180,6 @@ public class CashCount implements ICashCount{
         return c;
     }
 
-    public static CashCount sub(CashCount cashCount, CashCount cashInserted) {
-        CashCount c = new CashCount();
-        c.countOf20poundsNote = cashCount.countOf20poundsNote - cashInserted.countOf20poundsNote;
-        c.countOf10poundsNote = cashCount.countOf10poundsNote - cashInserted.countOf10poundsNote;
-        c.countOf5poundsNote = cashCount.countOf5poundsNote - cashInserted.countOf5poundsNote;
-        c.countOf2poundsNote = cashCount.countOf2poundsNote - cashInserted.countOf2poundsNote;
-        c.countOf1poundsNote = cashCount.countOf1poundsNote - cashInserted.countOf1poundsNote;
-        c.countOf50p = cashCount.countOf50p - cashInserted.countOf50p;
-        c.countOf20p = cashCount.countOf20p - cashInserted.countOf20p;
-        c.countOf10p = cashCount.countOf10p - cashInserted.countOf10p;
-
-        return c;
-    }
 
     @Override
     public void setNrNotes_20pounds(int noteCount) {
@@ -258,62 +260,3 @@ public class CashCount implements ICashCount{
     }
 }
 
-
-
-        /*
-        if (value >= 10000) {
-            int n = (int) value / 10000;
-            Count10000 -= n; // n개의 10000 지폐를 내 객체에서 빼놓기
-            c.Count10000 = n; // 10000짜리 세팅
-            value = value % 10000; // 나머지 돈을 value로 세팅
-        }
-
-        if (value >= 5000) {
-            int n = (int) value / 5000;
-            Count5000 -= n ;
-            c.Count5000 = n ;
-            value = value % 5000;
-        }
-
-        if (value >= 1000) {
-            int n = (int) value / 1000;
-            Count1000 -= n ;
-            c.Count1000 = n ;
-            value = value % 1000;
-        }
-
-        /// ...compose the right set of coin count in this object
-
-        return c;
-
-         */
-
-
-
-/*
-    public static CashCount returnChange(CashCount cashInserted) {
-        Zoo z = new Zoo();
-        CashCount c = new CashCount();
-        c.countOf20poundsNote = cashInserted.countOf20poundsNote - z.getEntrancePounds().cashInserted;
-        c.countOf10poundsNote = cash
-        ...
-    }
-
- */
-/*
-    int getValue() {
-
-    }
-
-
- */
-    /*
-    public void add(CashCount right) {
-        this.coin1 = this.coin1 + right.coin1;
-        this.coin2 = this.coin2 + right.coin2;
-        ...
-        }
-
-        // totalMoney += cashInserter;
-        -> totalMoney.add(cashInserter);
-     */

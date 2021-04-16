@@ -7,15 +7,15 @@ import java.util.ArrayList;
 public abstract class Area implements IArea {
 
     protected int id;
-    protected int name;
-    //List of next areas
-    public ArrayList<Area> nextAreas;
-    //List of prev areas
-    //public ArrayList<Area> prevAreas;
-    public ArrayList<Animal> listOfInhabitants;
     int maximum;
 
+    public ArrayList<Area> nextAreas; //List of next areas
 
+    public ArrayList<Animal> listOfInhabitants;
+
+
+    //List of prev areas
+    //public ArrayList<Area> prevAreas;
 
     public Area(int maximum) {
 
@@ -83,6 +83,11 @@ public abstract class Area implements IArea {
         return animalNames;
     }
 
+
+
+}
+
+/*
     //For debugging
     public void print() {
         System.out.println("Area Id: " + id);
@@ -93,9 +98,6 @@ public abstract class Area implements IArea {
         System.out.println();
     }
 
-}
-
-/*
     public void printPrev() {
         System.out.println("Area Id: " + id);
         System.out.print("\t prev: ");

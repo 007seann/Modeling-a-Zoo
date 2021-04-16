@@ -10,5 +10,4 @@ public class Aquarium extends Area implements IArea{
         super(maximum);
     }
 
-
 }

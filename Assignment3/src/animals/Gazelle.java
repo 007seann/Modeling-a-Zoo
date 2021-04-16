@@ -6,10 +6,7 @@ public class Gazelle extends Animal {
 
     private final String nickName;
 
-    public Gazelle(String nickName) {
-        this.nickName = nickName;
-
-    }
+    public Gazelle(String nickName) { this.nickName = nickName; }
 
     @Override
     public String getNickname() {

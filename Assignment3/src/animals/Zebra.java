@@ -6,10 +6,7 @@ public class Zebra extends Animal {
 
     private final String nickName;
 
-    public Zebra(String nickName) {
-        this.nickName = nickName;
-
-    }
+    public Zebra(String nickName) { this.nickName = nickName; }
     @Override
     public String getNickname() {
         return nickName;

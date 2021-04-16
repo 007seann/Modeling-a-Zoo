@@ -13,33 +13,23 @@ public class Zoo implements IZoo{
 
     static int lastID;
     static final int entranceID = 0;
-    ArrayList<Integer> areaIDs;
     ArrayList<Area> areas;
-    ArrayList<Animal> animals;
-    ArrayList<String> allNameLists;
 
     CashCount cashCount; // total money Zoo has
     int entranceFee; // Entrance fee in pence
 
 
-
-
     public Zoo() {
-        //areaIDs = new ArrayList<>();
         areas = new ArrayList<>();
-        animals = new ArrayList<>();
-        allNameLists = new ArrayList<>();
+        //animals = new ArrayList<>();
         lastID = 0;
         cashCount = new CashCount();
         entranceFee = 0;
         addArea(new Entrance());
-
-
     }
 
     @Override
     public int addArea(IArea area) {
-
 
             if (area instanceof Entrance) {
                 Area areaObject = (Area) area;
@@ -67,7 +57,6 @@ public class Zoo implements IZoo{
 
     }
 
-
     @Override
     public void removeArea(int areaId) {
 
@@ -83,22 +72,6 @@ public class Zoo implements IZoo{
         areas.remove(area);
 
     }
-/*
-        //Remove it from its prev's next
-        for(Area prev : area.prevAreas) {
-            if(areas.contains(prev)) {
-                prev.nextAreas.remove(area);
-            }
-        }
-
-        //Remove it from its next's prev
-        for(Area next : area.nextAreas) {
-            if(areas.contains(next)) {
-                next.prevAreas.remove(area);
-            }
-        }
-
-         */
 
     /**
      * Returns the area associated with the given ID.
@@ -150,7 +123,7 @@ public class Zoo implements IZoo{
                 area.addAnimalToArea(animal);
             }
         }
-        animals.add(animal);
+
         System.out.println("Animal is added");
         return Codes.ANIMAL_ADDED;
 
@@ -179,46 +152,6 @@ public class Zoo implements IZoo{
     }
 
 
-
-/*
-    {
-       //Get fromArea
-        Area fromArea = (Area) getArea(fromAreaId);
-        //Get Area
-        Area toArea = (Area) getArea(toAreaId);
-        for(Integer areaId : fromArea.getAdjacentAreas()) {
-            if(toAreaId == areaId) {
-                fromArea.nextAreas.add(toArea);
-            }
-        }
-
- */
-
-        /*
-        if (fromArea == null || toArea == null) {
-            return;
-        }
-
-         */
-        /*
-        //Splice them
-        if(!fromArea.nextAreas.contains(toArea)) {
-            fromArea.nextAreas.add(toArea);
-        }
-
-
-         */
-
-        /*
-        if(!toArea.prevAreas.contains(fromArea)){
-            toArea.prevAreas.add(fromArea);
-
-        }
-
-         */
-
-
-
     @Override
     public boolean isPathAllowed(ArrayList<Integer> areaIds) {
         // Treat empty paths as passing case.
@@ -235,7 +168,7 @@ public class Zoo implements IZoo{
         ArrayList<Area> visited = new ArrayList<>();
         visited.add(prev);
 
-        for (int i = 1; i < areas.size(); i++) {
+        for (int i = 1; i < areaIds.size(); i++) {
             // Get curr area.
             int currId = areaIds.get(i);
             if (!hasArea(currId))
@@ -303,22 +236,6 @@ public class Zoo implements IZoo{
         }
     }
 
-
-
-      /*
-        Area area = (Area) getArea(areaIDs.get(0));
-        for(int i=0; i<areaIDs.size(); i++) {
-            for(int j=0; j<area.nextAreas.size(); j++) {
-                if(!areaIDs.get(i).equals(area.nextAreas.get(j))) {
-                    unReachableAreaIDs.add(i);
-                }
-            }
-        }
-        return unReachableAreaIDs;
-    }
-
-       */
-
     @Override
     public void setEntranceFee(int pounds, int pence) {
         entranceFee = pounds * 100 + pence;
@@ -339,7 +256,10 @@ public class Zoo implements IZoo{
         CashCount moneyInserted = (CashCount) cashInserted;
 
         // Corner cases
-        // Case 1 when cashInserted is smaller than entranceFee
+
+        // Case 1 when the inserted money is exactly the same with entranceFee, then no change.
+
+        // Case 2 when cashInserted is smaller than entranceFee
         if(moneyInserted.getValue() < entranceFee) {
             return moneyInserted;
         }
@@ -350,11 +270,13 @@ public class Zoo implements IZoo{
         // changeValue(pence) = cashInserted(CashCount) - entranceFee(pence)
         int changeValue = CashCount.subtract(moneyInserted, entranceFee);
 
+        // Case 3 when the inserted money is too much and the machine is able to give exact change,
+        // then the machine much do so.
         // Update cashCount by subtracting changeValue from it.
         // Return change converted in CashCount for the given changeValue.
         CashCount change = cashCount.pay(changeValue);
 
-        // Case 2 When we can't pay the change -- the converted CashCount is different than changeValue.
+        // Case 4 When we can't pay the change -- the converted CashCount is different with changeValue.
         if (change.getValue() != changeValue) {
             // restore the original money to cashCount that Zoo has.
             cashCount = CashCount.add(cashCount, change);
@@ -367,61 +289,7 @@ public class Zoo implements IZoo{
         // Now all meet. Just return the change.
         return change;
 
-        // Case 3
-        // Case 4
-        // else부분이 20파운드 11장을 내야하는데 10장있을경우 1장을 다음 화폐 단위로 넘겨주는 코드
-
     }
 
 }
 
-/*
-    @Override
-    public boolean isPathAllowed(ArrayList<Integer> areaIds) {
-
-        if(areaIds == null) {
-            return false;
-        }
-
-        for (int i=0; i<areas.size(); i++){
-            Area areaInput = (Area) getArea(areaIds.get(i));
-            if(areaInput == null) { return false; }
-            if (areas.get(i).nextAreas != areaInput.nextAreas) {
-                if(areas.get(i).nextAreas == null || areaInput.nextAreas == null) { return false; }
-                return false;
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public ArrayList<String> visit(ArrayList<Integer> areaIdsVisited) {
-        if (!isPathAllowed(areaIdsVisited)) {
-            return null;
-        }
-
-        for (Integer areaId : areaIdsVisited) {
-            Area area = (Area) getArea(areaId);
-            if(area == null || area.getAnimalFromArea() == null) {
-                return null;
-            }
-            allNameLists.add(area.getAnimalFromArea());
-        }
-        return allNameLists;
-    }
- */
-
-/*
-    CashCount payEntranceFee(CashCount cashInserted) {
-        //totalMoney += cashInserted;
-        cashCount = CashCount.add(cashCount, cashInserted);
-
-        //return cashInserted - entranceFee;
-        double returnValue = CashCount.subtract(cashInserted, entranceFee);
-
-        //Update totalMoney by subtracting returnValue;
-        return cashCount.pay(returnValue);
-    }
-
-
- */

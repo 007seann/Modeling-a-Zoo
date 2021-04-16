@@ -7,10 +7,7 @@ public class Parrot extends Animal{
     private final String nickName;
 
 
-    public Parrot(String nickName) {
-        this.nickName = nickName;
-
-    }
+    public Parrot(String nickName) { this.nickName = nickName; }
 
     @Override
     public String getNickname() {
