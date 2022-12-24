@@ -21,7 +21,6 @@ public class Zoo implements IZoo{
 
     public Zoo() {
         areas = new ArrayList<>();
-        //animals = new ArrayList<>();
         lastID = 0;
         cashCount = new CashCount();
         entranceFee = 0;

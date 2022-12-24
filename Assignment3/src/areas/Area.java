@@ -13,7 +13,6 @@ public abstract class Area implements IArea {
 
     public ArrayList<Animal> listOfInhabitants;
 
-
     //List of prev areas
     //public ArrayList<Area> prevAreas;
 
@@ -33,9 +32,7 @@ public abstract class Area implements IArea {
 
 
     public boolean IsCompatibleWithInhabitants(Animal animal) {
-        //if (isHabitat()) {
-        //    return false;
-        //}
+
         for(Animal inhabit : listOfInhabitants) {
            if(!animal.isCompatibleWith(inhabit)) {
                   return false;
@@ -63,7 +60,6 @@ public abstract class Area implements IArea {
     public ArrayList<Integer> getAdjacentAreas() {
         ArrayList<Integer> a = new ArrayList<>();
         for (Area nextArea : nextAreas) {
-            //if(nextArea != null)
             a.add(nextArea.getId());
         }
         return a;
